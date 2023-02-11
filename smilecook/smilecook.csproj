@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>smilecook</ApplicationTitle>
+		<ApplicationTitle>Smilecook</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.smilecook</ApplicationId>

@@ -33,6 +33,49 @@ namespace smilecook.ViewModels
         bool isRefreshing;
 
         [RelayCommand]
+        async Task SearchRecipesAsync(string searchTerm)
+        {
+            Debug.WriteLine("searchTerm");
+            Debug.WriteLine(searchTerm);
+
+            if (IsBusy)
+                return;
+
+            try
+            {
+                if (connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Internet Issue", $"Check your internet and try again.", "OK");
+
+                    return;
+                }
+
+                IsBusy = true;
+                List<RecipeHits> response = await recipeService.SearchByName(searchTerm);
+
+                if (response.Count > 0)
+                {
+                    RecipesCol.Clear();
+                }
+
+                foreach (var recipe in response)
+                {
+                    RecipesCol.Add(recipe.Recipe);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"Unable to get recipes: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                IsRefreshing = false;
+            }
+        }
+
+        [RelayCommand]
         async Task GetRecipesAsync()
         {
             if (IsBusy)
@@ -49,6 +92,7 @@ namespace smilecook.ViewModels
 
                 IsBusy = true;
                 List<RecipeHits> response = await recipeService.GetRecipes();
+                
                 if (response.Count > 0) 
                 {
                     RecipesCol.Clear();

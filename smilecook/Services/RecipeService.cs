@@ -33,16 +33,16 @@ namespace smilecook.Services
         {
             RecipeResponse result = new RecipeResponse();
 
-            var optionalQueryParams = new Dictionary<string, string>()
+            var optionalQueryParams = new Dictionary<string, string>() 
             {
-                {"mealType", "Dinner" }
+                {"mealType", "Dinner" } // change depending on the time of the day
             };
-            url = QueryHelpers.AddQueryString(url, optionalQueryParams);
+            string requestUrl = QueryHelpers.AddQueryString(url, optionalQueryParams);
 
             Debug.WriteLine("url");
-            Debug.WriteLine(url);
+            Debug.WriteLine(requestUrl);
 
-            var response = await httpClient.GetAsync(url);
+            var response = await httpClient.GetAsync(requestUrl);
 
             if (response.IsSuccessStatusCode)
             {
@@ -52,5 +52,27 @@ namespace smilecook.Services
             return result.Hits;
         }
 
+        public async Task<List<RecipeHits>> SearchByName(string searchTerm) // search for specific recipes
+        {
+            RecipeResponse result = new RecipeResponse();
+
+            var optionalQueryParams = new Dictionary<string, string>()
+            {
+                {"q", searchTerm }
+            };
+            string requestUrl = QueryHelpers.AddQueryString(url, optionalQueryParams);
+
+            Debug.WriteLine("url");
+            Debug.WriteLine(requestUrl);
+
+            var response = await httpClient.GetAsync(requestUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
+            }
+
+            return result.Hits;
+        }
     }
 }

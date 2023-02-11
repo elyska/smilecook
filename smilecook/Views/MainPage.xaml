@@ -7,37 +7,42 @@
              x:Class="smilecook.MainPage"
              Title="{Binding Title}">
 
-    <RefreshView Command="{Binding GetRecipesCommand}"
+    <StackLayout>
+        <SearchBar Placeholder="Search recipes..."
+                   x:Name="searchBar"
+                   SearchCommand="{Binding SearchRecipesCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+        
+        <RefreshView Command="{Binding GetRecipesCommand}"
                  IsRefreshing="{Binding IsRefreshing}">
 
-        <CollectionView ItemsSource="{Binding RecipesCol}"
+            <CollectionView ItemsSource="{Binding RecipesCol}"
                         SelectionMode="None"
                         Style="{StaticResource MainLayout}">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:RecipeDetails">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:RecipeDetails">
 
-                    <Border Style="{StaticResource RecipeCard}">
-                        <Grid ColumnDefinitions="Auto, *"
+                        <Border Style="{StaticResource RecipeCard}">
+                            <Grid ColumnDefinitions="Auto, *"
                               RowDefinitions="*" 
-                              ColumnSpacing="20">
-                            <Image Style="{StaticResource ThumbnailImage}"
+                              ColumnSpacing="10">
+                                <Image Style="{StaticResource ThumbnailImage}"
                                    Grid.Column="0"
                                    Source="{Binding Image}" />
-                            <Label Text="{Binding Label}"
-                                   Style="{StaticResource TitleLabel}" 
+                                <Label Text="{Binding Label}"
+                                   Style="{StaticResource CardTitle}" 
                                    Grid.Column="1"/>
-                        </Grid>
-                    </Border>
-                        
-
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
+                            </Grid>
+                        </Border>
 
 
-    </RefreshView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 
 
 </ContentPage>
