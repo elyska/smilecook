@@ -8,5 +8,7 @@ namespace smilecook.Models
 {
     class RecipeResponse
     {
+        public int Count { get; set; }
+        public List<RecipeHits> Hits { get; set; }
     }
 }

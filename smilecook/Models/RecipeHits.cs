@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace smilecook.Models
 {
-    class RecipeHits
+    public class RecipeHits
     {
+        public RecipeDetails Recipe { get; set; }
     }
 }
