@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:smilecook.Models"
+             xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
+             x:DataType="viewmodel:RecipesViewModel"
+             x:Class="smilecook.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout>
+        <SearchBar Placeholder="Search recipes..."
+                   x:Name="searchBar"
+                   SearchCommand="{Binding SearchRecipesCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" 
+                   Style="{StaticResource SearchField}" />
+
+        <RefreshView Command="{Binding SearchRecipesCommand}"
+                     CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                     IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView ItemsSource="{Binding RecipesCol}"
+                        SelectionMode="None"
+                        Style="{StaticResource MainLayout}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:RecipeDetails">
+
+                        <Border Style="{StaticResource RecipeCard}">
+                            <Grid ColumnDefinitions="Auto, *"
+                              RowDefinitions="*" 
+                              ColumnSpacing="10">
+                                <Image Style="{StaticResource ThumbnailImage}"
+                                   Grid.Column="0"
+                                   Source="{Binding Image}" />
+                                <Label Text="{Binding Label}"
+                                   Style="{StaticResource CardTitle}" 
+                                   Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+
+
+</ContentPage>
