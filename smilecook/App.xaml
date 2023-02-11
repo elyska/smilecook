@@ -29,10 +29,10 @@
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
-            <!--<Style TargetType="View" x:Key="MainLayout"
+            <Style TargetType="View" x:Key="MainLayout"
                    ApplyToDerivedTypes="true">
                 <Setter Property="Background" Value="{StaticResource Background}" />
-            </Style>-->
+            </Style>
 
 
             <Shadow
