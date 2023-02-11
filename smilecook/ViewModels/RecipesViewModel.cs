@@ -49,7 +49,11 @@ namespace smilecook.ViewModels
 
                 IsBusy = true;
                 List<RecipeHits> response = await recipeService.GetRecipes();
-
+                if (response.Count > 0) 
+                {
+                    RecipesCol.Clear();
+                }
+                
                 foreach (var recipe in response)
                 {
                     RecipesCol.Add(recipe.Recipe);

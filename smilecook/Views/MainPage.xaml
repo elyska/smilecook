@@ -11,16 +11,25 @@
                  IsRefreshing="{Binding IsRefreshing}">
 
         <CollectionView ItemsSource="{Binding RecipesCol}"
-                            SelectionMode="None">
+                        SelectionMode="None"
+                        Style="{StaticResource MainLayout}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:RecipeDetails">
 
-
-                    <VerticalStackLayout >
-                        <Label Text="{Binding Label}" />
-                        <Label Text="{Binding Url}" />
-                    </VerticalStackLayout>
+                    <Border Style="{StaticResource RecipeCard}">
+                        <Grid ColumnDefinitions="Auto, *"
+                              RowDefinitions="*" 
+                              ColumnSpacing="20">
+                            <Image Style="{StaticResource ThumbnailImage}"
+                                   Grid.Column="0"
+                                   Source="{Binding Image}" />
+                            <Label Text="{Binding Label}"
+                                   Style="{StaticResource TitleLabel}" 
+                                   Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+                        
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -11,5 +11,7 @@ namespace smilecook.Models
         public string Label { get; set; }
         public string Url { get; set; }
         public string Image { get; set; }
+        public List<string> MealType { get; set; }
+        public List<string> HealthLabels { get; set; }
     }
 }

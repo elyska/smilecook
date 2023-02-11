@@ -9,6 +9,44 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Colours -->
+            <Color x:Key="Shadow">Grey</Color>
+            <Color x:Key="Background">#f7f7f7</Color>
+
+
+            <Style TargetType="Image" x:Key="ThumbnailImage">
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+            
+            <Style x:Key="TitleLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style TargetType="View" x:Key="MainLayout"
+                   ApplyToDerivedTypes="true">
+                <Setter Property="Background" Value="{StaticResource Background}" />
+            </Style>
+
+
+            <Shadow
+                x:Key="CardShadow"
+                Brush="{StaticResource Shadow}"
+                Radius="5"
+                Opacity="0.6"/>
+
+            <Style x:Key="RecipeCard" TargetType="Border">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="10"/>
+                <!--<Setter Property="Shadow" Value="{StaticResource CommonShadow}"/>-->
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
