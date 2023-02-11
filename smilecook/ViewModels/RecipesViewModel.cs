@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using smilecook.Models;
 using smilecook.Services;
+using smilecook.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -114,6 +115,19 @@ namespace smilecook.ViewModels
                 IsBusy = false;
                 IsRefreshing = false;
             }
+        }
+
+        [RelayCommand]
+        async Task GoToRecipeDetailAsync(RecipeDetails recipe)
+        {
+            if (recipe is null)
+                return;
+
+            await Shell.Current.GoToAsync($"{nameof(RecipeDetailPage)}", true,
+                new Dictionary<string, object>
+                {
+                    {"RecipeDetails", recipe}
+                });
         }
     }
 }
