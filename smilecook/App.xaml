@@ -50,6 +50,14 @@
                 <!--<Setter Property="Shadow" Value="{StaticResource CommonShadow}"/>-->
             </Style>
 
+            <Style x:Key="LabelTag" TargetType="Border">
+                <Setter Property="Background" Value="red"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="15,5"/>
+            </Style>
+
             <Style x:Key="SearchField" TargetType="SearchBar">
                 <Setter Property="Background" Value="white" />
                 <Setter Property="HorizontalOptions" Value="Center" />

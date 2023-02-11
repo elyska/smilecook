@@ -55,6 +55,9 @@ namespace smilecook.ViewModels
                 IsBusy = true;
                 List<RecipeHits> response = await recipeService.SearchByName(searchTerm);
 
+                Debug.WriteLine("response");
+                Debug.WriteLine(response);
+
                 if (response.Count > 0)
                 {
                     Recipes.Clear();
@@ -94,7 +97,10 @@ namespace smilecook.ViewModels
 
                 IsBusy = true;
                 List<RecipeHits> response = await recipeService.GetRecipes();
-                
+
+                Debug.WriteLine("response");
+                Debug.WriteLine(response);
+
                 if (response.Count > 0) 
                 {
                     Recipes.Clear();
