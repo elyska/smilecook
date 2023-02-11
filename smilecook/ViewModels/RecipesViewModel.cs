@@ -18,10 +18,10 @@ namespace smilecook.ViewModels
         IConnectivity connectivity;
         RecipeService recipeService;
 
-        public ObservableCollection<RecipeDetails> RecipesCol { get; } = new();
+        public ObservableCollection<RecipeDetails> Recipes { get; } = new();
         public RecipesViewModel(RecipeService recipeService, IConnectivity connectivity)
         {
-            Title = "Recipes";
+            //Title = "Recipes";
 
             this.recipeService = recipeService;
             this.connectivity = connectivity;
@@ -57,12 +57,12 @@ namespace smilecook.ViewModels
 
                 if (response.Count > 0)
                 {
-                    RecipesCol.Clear();
+                    Recipes.Clear();
                 }
 
                 foreach (var recipe in response)
                 {
-                    RecipesCol.Add(recipe.Recipe);
+                    Recipes.Add(recipe.Recipe);
                 }
             }
             catch (Exception ex)
@@ -97,12 +97,12 @@ namespace smilecook.ViewModels
                 
                 if (response.Count > 0) 
                 {
-                    RecipesCol.Clear();
+                    Recipes.Clear();
                 }
                 
                 foreach (var recipe in response)
                 {
-                    RecipesCol.Add(recipe.Recipe);
+                    Recipes.Add(recipe.Recipe);
                 }
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace smilecook.ViewModels
             await Shell.Current.GoToAsync($"{nameof(RecipeDetailPage)}", true,
                 new Dictionary<string, object>
                 {
-                    {"RecipeDetails", recipe}
+                    {"Recipe", recipe}
                 });
         }
     }

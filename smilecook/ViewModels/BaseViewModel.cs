@@ -12,7 +12,7 @@ namespace smilecook.ViewModels
     {
         public BaseViewModel()
         {
-
+            Title = AppInfo.Current.Name;
         }
 
         [ObservableProperty]

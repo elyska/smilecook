@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using smilecook.Services;
 using smilecook.ViewModels;
+using smilecook.Views;
 
 namespace smilecook;
 
@@ -26,8 +27,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<RecipeService>();
 
         builder.Services.AddSingleton<RecipesViewModel>();
+        builder.Services.AddTransient<RecipeDetailViewModel>();
 
         builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<RecipeDetailPage>();
 
         return builder.Build();
 	}

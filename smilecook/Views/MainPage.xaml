@@ -18,7 +18,7 @@
                      CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                      IsRefreshing="{Binding IsRefreshing}">
 
-            <CollectionView ItemsSource="{Binding RecipesCol}"
+            <CollectionView ItemsSource="{Binding Recipes}"
                         SelectionMode="None"
                         Style="{StaticResource MainLayout}">
 
