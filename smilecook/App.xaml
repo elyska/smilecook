@@ -9,11 +9,13 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+     
 
             <!-- Colours -->
+            <Color x:Key="Primary">red</Color>
             <Color x:Key="Shadow">Grey</Color>
             <Color x:Key="Background">#f7f7f7</Color>
-
+          
 
             <Style TargetType="Image" x:Key="ThumbnailImage">
                 <Setter Property="HeightRequest" Value="100" />
@@ -27,10 +29,10 @@
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
-            <Style TargetType="View" x:Key="MainLayout"
+            <!--<Style TargetType="View" x:Key="MainLayout"
                    ApplyToDerivedTypes="true">
                 <Setter Property="Background" Value="{StaticResource Background}" />
-            </Style>
+            </Style>-->
 
 
             <Shadow
@@ -46,6 +48,11 @@
                 <Setter Property="Padding" Value="0,0,10,0"/>
                 <Setter Property="Margin" Value="10"/>
                 <!--<Setter Property="Shadow" Value="{StaticResource CommonShadow}"/>-->
+            </Style>
+
+            <Style x:Key="SearchField" TargetType="SearchBar">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

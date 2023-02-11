@@ -38,6 +38,7 @@ namespace smilecook.ViewModels
             Debug.WriteLine("searchTerm");
             Debug.WriteLine(searchTerm);
 
+            IsRefreshing = true;
             if (IsBusy)
                 return;
 
@@ -66,7 +67,7 @@ namespace smilecook.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"Unable to get recipes: {ex.Message}", "OK");
+                //await Shell.Current.DisplayAlert("Error!", $"Unable to get recipes: {ex.Message}", "OK");
             }
             finally
             {

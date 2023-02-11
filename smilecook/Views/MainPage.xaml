@@ -11,10 +11,12 @@
         <SearchBar Placeholder="Search recipes..."
                    x:Name="searchBar"
                    SearchCommand="{Binding SearchRecipesCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
-        
-        <RefreshView Command="{Binding GetRecipesCommand}"
-                 IsRefreshing="{Binding IsRefreshing}">
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" 
+                   Style="{StaticResource SearchField}" />
+
+        <RefreshView Command="{Binding SearchRecipesCommand}"
+                     CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                     IsRefreshing="{Binding IsRefreshing}">
 
             <CollectionView ItemsSource="{Binding RecipesCol}"
                         SelectionMode="None"
