@@ -5,25 +5,49 @@
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:RecipeDetailViewModel"
              Title="{Binding Title}">
-    <ScrollView>
+    <!--Shell.NavBarIsVisible="False"-->
+    <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout>
-            <Label Text="{Binding Recipe.Label}" />
 
-            <Image Source="{Binding Recipe.Image}" />
-            <Button Text="More" Command="{Binding GoToLinkCommand}" CommandParameter="{Binding Recipe.Url}"/>
+            <Grid ColumnDefinitions="*"
+                  RowDefinitions="*, Auto, Auto">
 
-            <CollectionView ItemsSource="{Binding Recipe.IngredientLines}"
+                <Image Source="{Binding Recipe.Image}" 
+                        Grid.RowSpan="2"/>
+
+                <Frame Style="{StaticResource TitleBorder}"
+                        Grid.RowSpan="2"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Recipe.Label}" Style="{StaticResource RecipeTitle}"/>
+                        <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
+                            <Image Source="timer.png" Style="{StaticResource Icon}"/>
+                            <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </Grid>
+
+
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
+
+                <CollectionView ItemsSource="{Binding Recipe.IngredientLines}"
                             SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                        <VerticalStackLayout>
-                            <Label Text="{Binding .}" />
-                        </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding .}" />
+                            </VerticalStackLayout>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
             <CollectionView ItemsSource="{Binding Recipe.DietLabels}"
                                 SelectionMode="None"
@@ -36,7 +60,6 @@
                                 <Label Text="{Binding .}" />
                             </Border>
                         </HorizontalStackLayout>
-
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -57,6 +80,43 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+
+            <CollectionView ItemsSource="{Binding Recipe.MealType}"
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <HorizontalStackLayout>
+                            <Border Style="{StaticResource LabelTag}">
+                                <Label Text="{Binding .}" />
+                            </Border>
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView ItemsSource="{Binding Recipe.CuisineType}"
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <HorizontalStackLayout>
+                            <Border Style="{StaticResource LabelTag}">
+                                <Label Text="{Binding .}" />
+                            </Border>
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+            <Button Text="More" Command="{Binding GoToLinkCommand}" CommandParameter="{Binding Recipe.Url}"/>
 
 
         </VerticalStackLayout>
