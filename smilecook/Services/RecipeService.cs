@@ -47,6 +47,9 @@ namespace smilecook.Services
             if (response.IsSuccessStatusCode)
             {
                 result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
+                var content = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("content");
+                Debug.WriteLine(content);
             }
 
             return result.Hits;

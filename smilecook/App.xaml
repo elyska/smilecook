@@ -44,16 +44,16 @@
                 <Setter Property="HeightRequest" Value="90"/>-->
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="Padding" Value="40, 20"/>
             </Style>
             <Style x:Key="IconLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="Background" Value="white"/>
             </Style>
 
-            <Style x:Key="IconLabelContainer" TargetType="VerticalStackLayout">
+            <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
                 <Setter Property="Spacing" Value="5"/>
-                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Margin" Value="10, 0, 10, 10"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
@@ -84,16 +84,18 @@
             </Style>
 
 
-            <Style x:Key="TitleBorder" TargetType="Frame">
+            <Style x:Key="TitleBorder" TargetType="Border">
                 <Setter Property="Background" Value="white" />
-                <Setter Property="CornerRadius" Value="10"/>
-                <!--<Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
                 <Setter Property="StrokeThickness" Value="0"/>
-                <Setter Property="Shadow" Value="{StaticResource CardShadow}"/>-->
-
-                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="Shadow" Value="{StaticResource CardShadow}"/>
+                <!--
                 <Setter Property="BorderColor" Value="White"/>
                 <Setter Property="HasShadow" Value="true"/>
+                <Setter Property="CornerRadius" Value="10"/>-->
+
+                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="MaximumWidthRequest" Value="300"/>
 
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0"/>

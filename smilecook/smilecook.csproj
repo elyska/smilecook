@@ -49,7 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\timer.png" />
+	  <None Remove="Resources\Images\clock.png" />
+	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\weight.png" />
 	</ItemGroup>
 
 	<ItemGroup>

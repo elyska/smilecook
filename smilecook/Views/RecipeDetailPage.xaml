@@ -10,23 +10,34 @@
         <VerticalStackLayout>
 
             <Grid ColumnDefinitions="*"
-                  RowDefinitions="*, Auto, Auto">
+                  RowDefinitions="*, Auto, 40">
 
                 <Image Source="{Binding Recipe.Image}" 
                         Grid.RowSpan="2"/>
 
-                <Frame Style="{StaticResource TitleBorder}"
+                <Border Style="{StaticResource TitleBorder}" 
                         Grid.RowSpan="2"
                         Grid.Row="1"
                         Grid.Column="1">
                     <VerticalStackLayout>
                         <Label Text="{Binding Recipe.Label}" Style="{StaticResource RecipeTitle}"/>
-                        <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
-                            <Image Source="timer.png" Style="{StaticResource Icon}"/>
-                            <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
-                        </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="Auto, Auto, Auto" HorizontalOptions="Center">
+                            <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="clock.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="energy.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="weight.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.TotalWeight, StringFormat='{0:.} g'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                        </Grid>
                     </VerticalStackLayout>
-                </Frame>
+                    
+                </Border>
 
             </Grid>
 

@@ -18,5 +18,6 @@ namespace smilecook.Models
         public List<string> CuisineType { get; set; }
         public double Calories { get; set; }
         public double TotalTime { get; set; }
+        public double TotalWeight { get; set; }
     }
 }
