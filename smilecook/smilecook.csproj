@@ -51,7 +51,10 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\clock.png" />
 	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\open_in_new_1.png" />
+	  <None Remove="Resources\Images\open_in_new_img.png" />
 	  <None Remove="Resources\Images\weight.png" />
+	  <None Remove="Resources\Images\world.png" />
 	</ItemGroup>
 
 	<ItemGroup>

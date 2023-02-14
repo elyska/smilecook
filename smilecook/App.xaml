@@ -34,6 +34,13 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
+            <Style x:Key="Link" TargetType="Button">
+                <Setter Property="Background" Value="transparent"/>
+                <Setter Property="TextColor" Value="black"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
             <Style x:Key="RecipeTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -53,7 +60,7 @@
 
             <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
                 <Setter Property="Spacing" Value="5"/>
-                <Setter Property="Margin" Value="10, 0, 10, 10"/>
+                <Setter Property="Margin" Value="0, 0, 0, 10"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
@@ -82,7 +89,6 @@
                 <Setter Property="Margin" Value="10"/>
                 <!--<Setter Property="Shadow" Value="{StaticResource CardShadow}"/>-->
             </Style>
-
 
             <Style x:Key="TitleBorder" TargetType="Border">
                 <Setter Property="Background" Value="white" />
