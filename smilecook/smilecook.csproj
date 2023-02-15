@@ -32,10 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\Images\cutlery.svg" Color="#FFC439" Resize="false" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\logo.svg" Color="#FFC439" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,7 +50,11 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\clock.png" />
+	  <None Remove="Resources\Images\cutlery.svg" />
+	  <None Remove="Resources\Images\cutlery_yellow.png" />
 	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\open_in_new_1.png" />
 	  <None Remove="Resources\Images\open_in_new_img.png" />
 	  <None Remove="Resources\Images\weight.png" />

@@ -23,6 +23,11 @@
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
+            <Style TargetType="Image" x:Key="Logo">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
             <Style TargetType="Image" x:Key="Icon">
                 <Setter Property="HeightRequest" Value="20" />
                 <Setter Property="WidthRequest" Value="20" />

@@ -61,54 +61,44 @@
             </VerticalStackLayout>
 
 
-            <CollectionView ItemsSource="{Binding Recipe.DietLabels}"
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Diet Labels" Style="{StaticResource CardTitle}"/>
+                <CollectionView ItemsSource="{Binding Recipe.DietLabels}"
                                 SelectionMode="None"
                                 ItemsLayout="HorizontalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                        <HorizontalStackLayout>
-                            <Border Style="{StaticResource LabelTag}">
-                                <Label Text="{Binding .}" />
-                            </Border>
-                        </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Border Style="{StaticResource LabelTag}">
+                                    <Label Text="{Binding .}" />
+                                </Border>
+                            </HorizontalStackLayout>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
-            <CollectionView ItemsSource="{Binding Recipe.HealthLabels}"
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Health Labels" Style="{StaticResource CardTitle}"/>
+                <CollectionView ItemsSource="{Binding Recipe.HealthLabels}"
                             SelectionMode="None"
                             ItemsLayout="HorizontalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                        <StackLayout>
-                            <Border Style="{StaticResource LabelTag}">
-                                <Label Text="{Binding .}" />
-                            </Border>
-                        </StackLayout>
+                            <StackLayout>
+                                <Border Style="{StaticResource LabelTag}">
+                                    <Label Text="{Binding .}" />
+                                </Border>
+                            </StackLayout>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
-
-            <CollectionView ItemsSource="{Binding Recipe.MealType}"
-                            SelectionMode="None"
-                            ItemsLayout="HorizontalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-
-                        <HorizontalStackLayout>
-                            <Border Style="{StaticResource LabelTag}">
-                                <Label Text="{Binding .}" />
-                            </Border>
-                        </HorizontalStackLayout>
-
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
 
             <VerticalStackLayout Style="{StaticResource ListLayout}">
                 <Label Text="Cuisine" Style="{StaticResource CardTitle}"/>
@@ -118,7 +108,6 @@
                             ItemsLayout="HorizontalList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-
 
                             <HorizontalStackLayout Grid.Column="2" Style="{StaticResource IconLabelContainer}">
                                 <Image Source="world.png" Style="{StaticResource Icon}"/>
@@ -131,12 +120,9 @@
             </VerticalStackLayout>
 
 
-
-
-
             <Button Text="Instructions" 
                     ImageSource="open_in_new_1.png" 
-                    ContentLayout="Right, 20" 
+                    ContentLayout="Right, 10" 
                     Style="{StaticResource Link}"
                     Command="{Binding GoToLinkCommand}" 
                     CommandParameter="{Binding Recipe.Url}">
