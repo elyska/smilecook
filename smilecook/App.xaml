@@ -39,6 +39,11 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
+            
+            <Style x:Key="CheckboxLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            
             <Style x:Key="Link" TargetType="Button">
                 <Setter Property="Background" Value="transparent"/>
                 <Setter Property="TextColor" Value="black"/>
@@ -68,6 +73,7 @@
                 <Setter Property="Margin" Value="0, 0, 0, 10"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
+
 
             <Style x:Key="ListLayout" TargetType="VerticalStackLayout">
                 <Setter Property="Spacing" Value="5"/>

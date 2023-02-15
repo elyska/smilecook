@@ -33,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddTransient<RecipeDetailViewModel>();
 
         builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<FiltersPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
 
         return builder.Build();

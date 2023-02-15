@@ -135,5 +135,11 @@ namespace smilecook.ViewModels
                     {"Recipe", recipe}
                 });
         }
+        [RelayCommand]
+        async Task GoToFiltersAsync()
+        {
+
+            await Shell.Current.GoToAsync($"{nameof(FiltersPage)}");
+        }
     }
 }

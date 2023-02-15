@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="smilecook.Views.FiltersPage"
+             Title="FiltersPage">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox />
+            <Label Text="Breakfast" Style="{StaticResource CheckboxLabel}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox />
+            <Label Text="Lunch" Style="{StaticResource CheckboxLabel}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox />
+            <Label Text="Dinner" Style="{StaticResource CheckboxLabel}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
