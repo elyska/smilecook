@@ -21,6 +21,7 @@ namespace smilecook.ViewModels
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
         public ObservableCollection<MealType> MealTypes { get; } = new();
         public ObservableCollection<Diet> Diets { get; } = new();
+        public ObservableCollection<Health> HealthLabels { get; } = new();
         public RecipesViewModel(RecipeService recipeService, IConnectivity connectivity)
         {
             //Title = "Recipes";
@@ -37,6 +38,7 @@ namespace smilecook.ViewModels
             // add filter options
             GetMealTypes();
             GetDiets();
+            GetHealthLabels();
 
             Task.Run(GetRecipesAsync);
 
@@ -68,6 +70,12 @@ namespace smilecook.ViewModels
             Diets.Add(new Diet() { Name = "high-protein" });
             Diets.Add(new Diet() { Name = "low-sodium" });
         }
+        private void GetHealthLabels()
+        {
+            HealthLabels.Add(new Health() { Name = "vegan" });
+            HealthLabels.Add(new Health() { Name = "vegetarian" });
+            HealthLabels.Add(new Health() { Name = "wheat-free" });
+        }
 
         [RelayCommand]
         async Task SearchRecipesAsync()
@@ -93,8 +101,14 @@ namespace smilecook.ViewModels
 
                 filters.Add(new Dictionary<string, string> { { "diet", selected } });
             }
-
             // health filters
+            var selectedHealth = HealthLabels.Where(x => x.IsSelected).Select(x => x.Name);
+            foreach (var selected in selectedHealth)
+            {
+                Debug.WriteLine($"{selected}");
+
+                filters.Add(new Dictionary<string, string> { { "health", selected } });
+            }
 
             IsRefreshing = true;
             if (IsBusy)

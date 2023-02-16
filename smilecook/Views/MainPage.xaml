@@ -22,7 +22,7 @@
             <Button Text="Filters" Command="{Binding ChangeFiltersVisibilityCommand}"/>
         </HorizontalStackLayout>
 
-        <VerticalStackLayout x:Name="filters" IsVisible="{Binding FiltersVisibility}">
+        <VerticalStackLayout IsVisible="{Binding FiltersVisibility}">
             <Label Text="Meal Type" Style="{StaticResource Title}" />
             <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
@@ -43,6 +43,22 @@
             <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Diet" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Health" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Health" >
 
                         <HorizontalStackLayout>
 
