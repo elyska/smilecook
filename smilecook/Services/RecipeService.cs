@@ -28,48 +28,41 @@ namespace smilecook.Services
 
             url = QueryHelpers.AddQueryString(url, queryParams); // add default query parameters
         }
-
-        public async Task<List<RecipeHits>> GetRecipes() // get random recipes
+        public async Task<List<RecipeHits>> SearchRecipes(string searchTerm, List<string> mealTypes, List<string> diets, List<string> health) 
         {
-            RecipeResponse result = new RecipeResponse();
-
-            var optionalQueryParams = new Dictionary<string, string>() 
-            {
-                {"mealType", "Dinner" } // change depending on the time of the day
-            };
-            string requestUrl = QueryHelpers.AddQueryString(url, optionalQueryParams);
-
-            Debug.WriteLine("url");
-            Debug.WriteLine(requestUrl);
-
-            var response = await httpClient.GetAsync(requestUrl);
-
-            if (response.IsSuccessStatusCode)
-            {
-                result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
-                var content = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine("content");
-                Debug.WriteLine(content);
-            }
-
-            return result.Hits;
-        }
-
-        public async Task<List<RecipeHits>> SearchByName(string searchTerm, List<Dictionary<string, string>> filters) // search for specific recipes
-        {
-            RecipeResponse result = new RecipeResponse();
+            string requestUrl = url;
 
             // add search term to query params
-            var optionalQueryParams = new Dictionary<string, string>()
+            if (searchTerm != "" && searchTerm is not null)
             {
-                {"q", searchTerm }
-            };
-            string requestUrl = QueryHelpers.AddQueryString(url, optionalQueryParams);
+                var optionalQueryParams = new Dictionary<string, string>()
+                {
+                    {"q", searchTerm }
+                };
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, optionalQueryParams);
+            }
 
             // add filters to query params
-            foreach (var filter in filters)
+            foreach (var item in mealTypes)
             {
-                requestUrl = QueryHelpers.AddQueryString(requestUrl, filter);
+                Debug.WriteLine($"{item}");
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, new Dictionary<string, string> { { "mealType", item } });
+
+            }
+            foreach (var item in diets)
+            {
+                Debug.WriteLine($"{item}");
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, new Dictionary<string, string> { { "diet", item } });
+            }
+            foreach (var item in health)
+            {
+                Debug.WriteLine($"{item}");
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, new Dictionary<string, string> { { "health", item } });
+            }
+            // if no parameters added, get "random" dinner recipes
+            if ((searchTerm == "" || searchTerm is null) && mealTypes.Count == 0 && diets.Count == 0 && health.Count == 0)
+            {
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, new Dictionary<string, string>() { { "mealType", "Dinner" } });
             }
 
             Debug.WriteLine("url");
@@ -77,6 +70,7 @@ namespace smilecook.Services
 
             var response = await httpClient.GetAsync(requestUrl);
 
+            RecipeResponse result = new RecipeResponse();
             if (response.IsSuccessStatusCode)
             {
                 result = await response.Content.ReadFromJsonAsync<RecipeResponse>();

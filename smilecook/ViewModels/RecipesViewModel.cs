@@ -40,7 +40,7 @@ namespace smilecook.ViewModels
             GetDiets();
             GetHealthLabels();
 
-            Task.Run(GetRecipesAsync);
+            Task.Run(SearchRecipesAsync);
 
         }
         [ObservableProperty]
@@ -84,31 +84,12 @@ namespace smilecook.ViewModels
             Debug.WriteLine(SearchTerm);
 
             // get filters
-            List<Dictionary<string, string>> filters = new();
             // meal type filters
-            var selectedMealTypes = MealTypes.Where(x => x.IsSelected).Select(x => x.Name);
-            foreach (var selected in selectedMealTypes)
-            {
-                Debug.WriteLine($"{selected}");
-
-                filters.Add(new Dictionary<string, string> { { "mealType", selected } });
-            }
+            var selectedMealTypes = MealTypes.Where(x => x.IsSelected).Select(x => x.Name).ToList();
             // diet filters
-            var selectedDiets = Diets.Where(x => x.IsSelected).Select(x => x.Name);
-            foreach (var selected in selectedDiets)
-            {
-                Debug.WriteLine($"{selected}");
-
-                filters.Add(new Dictionary<string, string> { { "diet", selected } });
-            }
+            var selectedDiets = Diets.Where(x => x.IsSelected).Select(x => x.Name).ToList();
             // health filters
-            var selectedHealth = HealthLabels.Where(x => x.IsSelected).Select(x => x.Name);
-            foreach (var selected in selectedHealth)
-            {
-                Debug.WriteLine($"{selected}");
-
-                filters.Add(new Dictionary<string, string> { { "health", selected } });
-            }
+            var selectedHealth = HealthLabels.Where(x => x.IsSelected).Select(x => x.Name).ToList();
 
             IsRefreshing = true;
             if (IsBusy)
@@ -124,24 +105,10 @@ namespace smilecook.ViewModels
                 }
 
                 IsBusy = true;
-                List<RecipeHits> response = new List<RecipeHits>();
-                if (SearchTerm != "" && SearchTerm is not null)
-                {
-                    response = await recipeService.SearchByName(SearchTerm, filters);
-                }
-                else
-                {
-                    response = await recipeService.GetRecipes();
-                }
+                List<RecipeHits> response = await recipeService.SearchRecipes(SearchTerm, selectedMealTypes, selectedDiets, selectedHealth);
                 
-
-                //if (response.Count > 0)
-                //{
-                    Recipes.Clear();
-                //}
-                Debug.WriteLine("Recipes.Count");
-                Debug.WriteLine(Recipes.Count);
-
+                Recipes.Clear();
+                
                 foreach (var recipe in response)
                 {
                     Recipes.Add(recipe.Recipe);
@@ -158,54 +125,11 @@ namespace smilecook.ViewModels
                 IsRefreshing = false;
             }
         }
-
+        
         [RelayCommand]
-        async Task ChangeFiltersVisibility()
+        void ChangeFiltersVisibility()
         {
             FiltersVisibility = !FiltersVisibility;
-        }
-
-        [RelayCommand]
-        async Task GetRecipesAsync()
-        {
-            if (IsBusy)
-                return;
-
-            try
-            {
-                if (connectivity.NetworkAccess != NetworkAccess.Internet)
-                {
-                    await Shell.Current.DisplayAlert("Internet Issue", $"Check your internet and try again.", "OK");
-
-                    return;
-                }
-
-                IsBusy = true;
-                List<RecipeHits> response = await recipeService.GetRecipes();
-
-                Debug.WriteLine("response");
-                Debug.WriteLine(response);
-
-                if (response.Count > 0) 
-                {
-                    Recipes.Clear();
-                }
-                
-                foreach (var recipe in response)
-                {
-                    Recipes.Add(recipe.Recipe);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"Unable to get recipes: {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-                IsRefreshing = false;
-            }
         }
 
         [RelayCommand]
