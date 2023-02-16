@@ -20,7 +20,7 @@ namespace smilecook.ViewModels
 
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
         public ObservableCollection<MealType> MealTypes { get; } = new();
-        public ObservableCollection<MealType> Diets { get; } = new();
+        public ObservableCollection<Diet> Diets { get; } = new();
         public RecipesViewModel(RecipeService recipeService, IConnectivity connectivity)
         {
             //Title = "Recipes";
@@ -33,7 +33,11 @@ namespace smilecook.ViewModels
 
             // Load data when the page appears
             IsRefreshing = true;
+
+            // add filter options
             GetMealTypes();
+            GetDiets();
+
             Task.Run(GetRecipesAsync);
 
         }
@@ -47,6 +51,9 @@ namespace smilecook.ViewModels
         string isSelected;
 
         [ObservableProperty]
+        bool filtersVisibility;
+
+        [ObservableProperty]
         bool breakfastChecked;
 
         private void GetMealTypes()
@@ -55,12 +62,11 @@ namespace smilecook.ViewModels
             MealTypes.Add(new MealType() { Name = "Lunch" });
             MealTypes.Add(new MealType() { Name = "Dinner" });
         }
-
-        [RelayCommand]
-        async Task ApplyFilters()
+        private void GetDiets()
         {
-            Debug.WriteLine("Called");
-            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+            Diets.Add(new Diet() { Name = "balanced" });
+            Diets.Add(new Diet() { Name = "high-protein" });
+            Diets.Add(new Diet() { Name = "low-sodium" });
         }
 
         [RelayCommand]
@@ -80,6 +86,13 @@ namespace smilecook.ViewModels
                 filters.Add(new Dictionary<string, string> { { "mealType", selected } });
             }
             // diet filters
+            var selectedDiets = Diets.Where(x => x.IsSelected).Select(x => x.Name);
+            foreach (var selected in selectedDiets)
+            {
+                Debug.WriteLine($"{selected}");
+
+                filters.Add(new Dictionary<string, string> { { "diet", selected } });
+            }
 
             // health filters
 
@@ -130,6 +143,12 @@ namespace smilecook.ViewModels
                 IsBusy = false;
                 IsRefreshing = false;
             }
+        }
+
+        [RelayCommand]
+        async Task ChangeFiltersVisibility()
+        {
+            FiltersVisibility = !FiltersVisibility;
         }
 
         [RelayCommand]

@@ -19,41 +19,44 @@
                    Text="{Binding SearchTerm}"
                    SearchCommand="{Binding SearchRecipesCommand}"
                    Style="{StaticResource SearchField}" />
-            <!--<Button Text="Filters" Command="{Binding GoToFiltersCommand}"/>-->
+            <Button Text="Filters" Command="{Binding ChangeFiltersVisibilityCommand}"/>
         </HorizontalStackLayout>
+
+        <VerticalStackLayout x:Name="filters" IsVisible="{Binding FiltersVisibility}">
+            <Label Text="Meal Type" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:MealType" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Diets" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Diet" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
         
-        <Label Text="Meal Type" Style="{StaticResource Title}" />
-        <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:MealType" >
-
-                    <HorizontalStackLayout>
-
-                        <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
-                        <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
-
-                    </HorizontalStackLayout>
-
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        
-        
-        <Label Text="Diet Labels" Style="{StaticResource Title}" />
-        <HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox />
-                <Label Text="Balanced" Style="{StaticResource CheckboxLabel}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox />
-                <Label Text="High-protein" Style="{StaticResource CheckboxLabel}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox />
-                <Label Text="Low-carb" Style="{StaticResource CheckboxLabel}"/>
-            </HorizontalStackLayout>
-        </HorizontalStackLayout>
         
         <RefreshView Command="{Binding SearchRecipesCommand}"
                      CommandParameter="{Binding Text, Source={x:Reference searchBar}}"

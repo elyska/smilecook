@@ -11,7 +11,7 @@
 
         <Label Text="Meal Type" Style="{StaticResource Title}" />
         <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding BreakfastChecked}"/>
+            <CheckBox />
             <Label Text="Breakfast" Style="{StaticResource CheckboxLabel}"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout>
@@ -37,7 +37,6 @@
             <Label Text="Low-carb" Style="{StaticResource CheckboxLabel}"/>
         </HorizontalStackLayout>
 
-        <Button Text="Apply filters" Command="{Binding ApplyFiltersCommand}"/>
     </VerticalStackLayout>
 
 </ContentPage>
