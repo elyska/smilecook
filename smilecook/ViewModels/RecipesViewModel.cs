@@ -33,11 +33,27 @@ namespace smilecook.ViewModels
         [ObservableProperty]
         bool isRefreshing;
 
-        [RelayCommand]
-        async Task SearchRecipesAsync(string searchTerm)
+        [ObservableProperty]
+        string searchTerm;
+
+        Dictionary<string, List<string>> filters2 = new Dictionary<string, List<string>>()
+            {
+                { "mealType", new List<string> { "breakfast" } },
+                { "diet", new List<string> { "balanced", "high-protein" } },
+            };
+
+        List<Dictionary<string, string>> filters = new List<Dictionary<string, string>>
         {
-            Debug.WriteLine("searchTerm");
-            Debug.WriteLine(searchTerm);
+            new Dictionary<string, string> { { "mealType", "Breakfast" } },
+            new Dictionary<string, string> { { "diet", "balanced" } },
+            new Dictionary<string, string> { { "diet", "low-sodium" } },
+        };
+
+        [RelayCommand]
+        async Task SearchRecipesAsync()
+        {
+            Debug.WriteLine("SearchTerm");
+            Debug.WriteLine(SearchTerm);
 
             IsRefreshing = true;
             if (IsBusy)
@@ -53,7 +69,7 @@ namespace smilecook.ViewModels
                 }
 
                 IsBusy = true;
-                List<RecipeHits> response = await recipeService.SearchByName(searchTerm);
+                List<RecipeHits> response = await recipeService.SearchByName(SearchTerm, filters);
 
                 Debug.WriteLine("response");
                 Debug.WriteLine(response);

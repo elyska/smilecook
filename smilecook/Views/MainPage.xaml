@@ -16,8 +16,8 @@
         <HorizontalStackLayout>
             <SearchBar Placeholder="Search recipes..."
                    x:Name="searchBar"
+                   Text="{Binding SearchTerm}"
                    SearchCommand="{Binding SearchRecipesCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" 
                    Style="{StaticResource SearchField}" />
             <Button Text="Filters" Command="{Binding GoToFiltersCommand}"/>
         </HorizontalStackLayout>

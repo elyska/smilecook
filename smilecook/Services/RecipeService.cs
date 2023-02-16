@@ -55,15 +55,22 @@ namespace smilecook.Services
             return result.Hits;
         }
 
-        public async Task<List<RecipeHits>> SearchByName(string searchTerm) // search for specific recipes
+        public async Task<List<RecipeHits>> SearchByName(string searchTerm, List<Dictionary<string, string>> filters) // search for specific recipes
         {
             RecipeResponse result = new RecipeResponse();
 
+            // add search term to query params
             var optionalQueryParams = new Dictionary<string, string>()
             {
                 {"q", searchTerm }
             };
             string requestUrl = QueryHelpers.AddQueryString(url, optionalQueryParams);
+
+            // add filters to query params
+            foreach (var filter in filters)
+            {
+                requestUrl = QueryHelpers.AddQueryString(requestUrl, filter);
+            }
 
             Debug.WriteLine("url");
             Debug.WriteLine(requestUrl);
@@ -73,6 +80,10 @@ namespace smilecook.Services
             if (response.IsSuccessStatusCode)
             {
                 result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
+
+                var content = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("content");
+                Debug.WriteLine(content);
             }
 
             return result.Hits;
