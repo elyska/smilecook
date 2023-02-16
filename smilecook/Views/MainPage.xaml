@@ -19,7 +19,40 @@
                    Text="{Binding SearchTerm}"
                    SearchCommand="{Binding SearchRecipesCommand}"
                    Style="{StaticResource SearchField}" />
-            <Button Text="Filters" Command="{Binding GoToFiltersCommand}"/>
+            <!--<Button Text="Filters" Command="{Binding GoToFiltersCommand}"/>-->
+        </HorizontalStackLayout>
+        
+        <Label Text="Meal Type" Style="{StaticResource Title}" />
+        <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:MealType" >
+
+                    <HorizontalStackLayout>
+
+                        <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                        <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                    </HorizontalStackLayout>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        
+        <Label Text="Diet Labels" Style="{StaticResource Title}" />
+        <HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox />
+                <Label Text="Balanced" Style="{StaticResource CheckboxLabel}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox />
+                <Label Text="High-protein" Style="{StaticResource CheckboxLabel}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox />
+                <Label Text="Low-carb" Style="{StaticResource CheckboxLabel}"/>
+            </HorizontalStackLayout>
         </HorizontalStackLayout>
         
         <RefreshView Command="{Binding SearchRecipesCommand}"
@@ -30,6 +63,12 @@
                         SelectionMode="None"
                         Style="{StaticResource MainLayout}">
 
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label Text="Sorry, no recipes found" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:RecipeDetails">
 

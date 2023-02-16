@@ -2,14 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="smilecook.Views.FiltersPage"
+             xmlns:model="clr-namespace:smilecook.Models"
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:RecipesViewModel"
              Title="FiltersPage">
 
     <VerticalStackLayout>
+
         <Label Text="Meal Type" Style="{StaticResource Title}" />
         <HorizontalStackLayout>
-            <CheckBox />
+            <CheckBox IsChecked="{Binding BreakfastChecked}"/>
             <Label Text="Breakfast" Style="{StaticResource CheckboxLabel}"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout>
@@ -35,7 +37,7 @@
             <Label Text="Low-carb" Style="{StaticResource CheckboxLabel}"/>
         </HorizontalStackLayout>
 
-        <Button Text="Apply filters" />
+        <Button Text="Apply filters" Command="{Binding ApplyFiltersCommand}"/>
     </VerticalStackLayout>
 
 </ContentPage>

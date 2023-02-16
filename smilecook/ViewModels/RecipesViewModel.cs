@@ -19,6 +19,8 @@ namespace smilecook.ViewModels
         RecipeService recipeService;
 
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
+        public ObservableCollection<MealType> MealTypes { get; } = new();
+        public ObservableCollection<MealType> Diets { get; } = new();
         public RecipesViewModel(RecipeService recipeService, IConnectivity connectivity)
         {
             //Title = "Recipes";
@@ -26,9 +28,14 @@ namespace smilecook.ViewModels
             this.recipeService = recipeService;
             this.connectivity = connectivity;
 
+            //MealType.Add(new MealTypes() { Name = "Lunch" });
+            //MealType.Add(new MealTypes() { Name = "Dinner" });
+
             // Load data when the page appears
             IsRefreshing = true;
+            GetMealTypes();
             Task.Run(GetRecipesAsync);
+
         }
         [ObservableProperty]
         bool isRefreshing;
@@ -36,24 +43,45 @@ namespace smilecook.ViewModels
         [ObservableProperty]
         string searchTerm;
 
-        Dictionary<string, List<string>> filters2 = new Dictionary<string, List<string>>()
-            {
-                { "mealType", new List<string> { "breakfast" } },
-                { "diet", new List<string> { "balanced", "high-protein" } },
-            };
+        [ObservableProperty]
+        string isSelected;
 
-        List<Dictionary<string, string>> filters = new List<Dictionary<string, string>>
+        [ObservableProperty]
+        bool breakfastChecked;
+
+        private void GetMealTypes()
         {
-            new Dictionary<string, string> { { "mealType", "Breakfast" } },
-            new Dictionary<string, string> { { "diet", "balanced" } },
-            new Dictionary<string, string> { { "diet", "low-sodium" } },
-        };
+            MealTypes.Add(new MealType() { Name = "Breakfast" });
+            MealTypes.Add(new MealType() { Name = "Lunch" });
+            MealTypes.Add(new MealType() { Name = "Dinner" });
+        }
+
+        [RelayCommand]
+        async Task ApplyFilters()
+        {
+            Debug.WriteLine("Called");
+            await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+        }
 
         [RelayCommand]
         async Task SearchRecipesAsync()
         {
             Debug.WriteLine("SearchTerm");
             Debug.WriteLine(SearchTerm);
+
+            // get filters
+            List<Dictionary<string, string>> filters = new();
+            // meal type filters
+            var selectedMealTypes = MealTypes.Where(x => x.IsSelected).Select(x => x.Name);
+            foreach (var selected in selectedMealTypes)
+            {
+                Debug.WriteLine($"{selected}");
+
+                filters.Add(new Dictionary<string, string> { { "mealType", selected } });
+            }
+            // diet filters
+
+            // health filters
 
             IsRefreshing = true;
             if (IsBusy)
@@ -69,15 +97,23 @@ namespace smilecook.ViewModels
                 }
 
                 IsBusy = true;
-                List<RecipeHits> response = await recipeService.SearchByName(SearchTerm, filters);
-
-                Debug.WriteLine("response");
-                Debug.WriteLine(response);
-
-                if (response.Count > 0)
+                List<RecipeHits> response = new List<RecipeHits>();
+                if (SearchTerm != "" && SearchTerm is not null)
                 {
-                    Recipes.Clear();
+                    response = await recipeService.SearchByName(SearchTerm, filters);
                 }
+                else
+                {
+                    response = await recipeService.GetRecipes();
+                }
+                
+
+                //if (response.Count > 0)
+                //{
+                    Recipes.Clear();
+                //}
+                Debug.WriteLine("Recipes.Count");
+                Debug.WriteLine(Recipes.Count);
 
                 foreach (var recipe in response)
                 {
@@ -154,7 +190,6 @@ namespace smilecook.ViewModels
         [RelayCommand]
         async Task GoToFiltersAsync()
         {
-
             await Shell.Current.GoToAsync($"{nameof(FiltersPage)}");
         }
     }
