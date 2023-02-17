@@ -11,15 +11,18 @@ using System.Threading.Tasks;
 
 namespace smilecook.Services
 {
-    public class MealTypeDBService : DBService
+    public class DietDBService : DBService
     {
-        public MealTypeDBService(string dbPath) : base(dbPath) 
+        public DietDBService(string dbpath) : base(dbpath)
         {
             // truncate and insert new data
-            DeleteAll<MealType>();
-            InsertMealType("Breakfast");
-            InsertMealType("Lunch");
-            InsertMealType("Dinner");
+            DeleteAll<Diet>();
+            InsertDiet("balanced");
+            InsertDiet("high-fibre");
+            InsertDiet("high-protein");
+            InsertDiet("low-carb");
+            InsertDiet("low-fat");
+            InsertDiet("low-sodium");
         }
         private void Init()
         {
@@ -27,28 +30,14 @@ namespace smilecook.Services
                 return;
 
             conn = new SQLiteConnection(_dbPath);
-            conn.CreateTable<MealType>();
+            conn.CreateTable<Diet>();
         }
-        public ObservableCollection<MealType> GetAllMealTypes()
-        {
-            try
-            {
-                Init();
-                return conn.Table<MealType>().ToObservableCollection();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to retrieve data. {ex.Message}" );
-            }
-
-            return new ObservableCollection<MealType>();
-        }
-        public void DeleteAll<MealType>()
+        public void DeleteAll<Diet>()
         {
             Init();
-            conn.DeleteAll<MealType>();
+            conn.DeleteAll<Diet>();
         }
-        public void InsertMealType(string name)
+        public void InsertDiet(string name)
         {
             int result = 0;
             try
@@ -60,7 +49,7 @@ namespace smilecook.Services
                     throw new Exception("Valid name required");
 
                 // enter this line
-                result = conn.Insert(new MealType { Name = name });
+                result = conn.Insert(new Diet { Name = name });
 
                 Debug.WriteLine($"{result} record(s) added (Name: {name})");
             }
@@ -68,6 +57,20 @@ namespace smilecook.Services
             {
                 Debug.WriteLine($"Failed to add {name}. Error: {ex.Message}");
             }
+        }
+        public ObservableCollection<Diet> GetAllDiets()
+        {
+            try
+            {
+                Init();
+                return conn.Table<Diet>().ToObservableCollection();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to retrieve data. {ex.Message}");
+            }
+
+            return new ObservableCollection<Diet>();
         }
 
     }

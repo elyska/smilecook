@@ -40,7 +40,7 @@
             </CollectionView>
 
             <Label Text="Diets" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="HorizontalList">
+            <CollectionView ItemsSource="{Binding Diets}"  ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Diet" >
 

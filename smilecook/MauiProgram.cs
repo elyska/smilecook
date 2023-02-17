@@ -39,6 +39,7 @@ public static class MauiProgram
         
         string dbPath = FileAccessHelper.GetLocalFilePath("database.db3");
         builder.Services.AddSingleton<MealTypeDBService>(s => ActivatorUtilities.CreateInstance<MealTypeDBService>(s, dbPath));
+        builder.Services.AddSingleton<DietDBService>(s => ActivatorUtilities.CreateInstance<DietDBService>(s, dbPath));
 
         return builder.Build();
 	}
