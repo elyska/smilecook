@@ -50,14 +50,7 @@ namespace smilecook.ViewModels
         string searchTerm;
 
         [ObservableProperty]
-        string isSelected;
-
-        [ObservableProperty]
         bool filtersVisibility;
-
-        [ObservableProperty]
-        bool breakfastChecked;
-
         private void GetMealTypes()
         {
             MealTypes.Add(new MealType() { Name = "Breakfast" });
@@ -143,11 +136,6 @@ namespace smilecook.ViewModels
                 {
                     {"Recipe", recipe}
                 });
-        }
-        [RelayCommand]
-        async Task GoToFiltersAsync()
-        {
-            await Shell.Current.GoToAsync($"{nameof(FiltersPage)}");
         }
     }
 }
