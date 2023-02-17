@@ -5,13 +5,10 @@ namespace smilecook;
 
 public partial class App : Application
 {
-    public static MealTypeDBService MealTypeService { get; private set; }
-    public App(MealTypeDBService mealTypeService)
+    public App()
 	{
 		InitializeComponent();
 
 		MainPage = new AppShell();
-
-		MealTypeService = mealTypeService;
 	}
 }

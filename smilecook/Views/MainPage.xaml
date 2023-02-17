@@ -40,7 +40,7 @@
             </CollectionView>
 
             <Label Text="Diets" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding Diets}"  ItemsLayout="VerticalGrid, 2">
+            <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filter" >
 
@@ -56,7 +56,7 @@
             </CollectionView>
 
             <Label Text="Health" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="HorizontalList">
+            <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filter" >
 

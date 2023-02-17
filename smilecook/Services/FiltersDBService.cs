@@ -17,8 +17,9 @@ namespace smilecook.Services
         {
             // truncate and insert new data
             DeleteAll<Filter>();
-            InsertFilter("vegan", "health");
-            InsertFilter("vegetarian", "health");
+            InsertFilter("Breakfast", "mealType");
+            InsertFilter("Lunch", "mealType");
+            InsertFilter("Dinner", "mealType");
 
             InsertFilter("balanced", "diet");
             InsertFilter("high-fibre", "diet");
@@ -26,6 +27,32 @@ namespace smilecook.Services
             InsertFilter("low-carb", "diet");
             InsertFilter("low-fat", "diet");
             InsertFilter("low-sodium", "diet");
+
+            InsertFilter("vegan", "health");
+            InsertFilter("vegetarian", "health");
+            InsertFilter("pescatarian", "health");
+            InsertFilter("gluten-free", "health");
+            InsertFilter("dairy-free", "health");
+            InsertFilter("fish-free", "health");
+            InsertFilter("tree-nut-free", "health");
+            InsertFilter("soy-free", "health");
+            InsertFilter("celery-free", "health");
+            InsertFilter("red-meat-free", "health");
+            /*
+            InsertFilter("immuno-supportive", "health");
+            InsertFilter("crustacean-free", "health");
+            InsertFilter("fodmap-free", "health");
+            InsertFilter("alcohol-cocktail", "health");
+            InsertFilter("pork-free", "health");
+            InsertFilter("wheat-free", "health");
+            InsertFilter("no-oil-added", "health");
+            InsertFilter("alcohol-free", "health");
+            InsertFilter("peanut-free", "health");
+            InsertFilter("shellfish-free", "health");
+            InsertFilter("egg-free", "health");
+            InsertFilter("sesame-free", "health");
+            InsertFilter("low-sugar", "health");
+                                                    */
         }
         private void Init()
         {
@@ -61,7 +88,7 @@ namespace smilecook.Services
                 Debug.WriteLine($"Failed to add {name}. Error: {ex.Message}");
             }
         }
-        public ObservableCollection<Filter> GetAllFilters(string type)
+        public ObservableCollection<Filter> GetFiltersByType(string type)
         {
             try
             {

@@ -17,37 +17,28 @@ namespace smilecook.ViewModels
     {
         IConnectivity connectivity;
         RecipeAPIService recipeService;
-        MealTypeDBService mealTypeService;
-        DietDBService dietService;
         FiltersDBService filterService;
 
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
-        public ObservableCollection<MealType> MealTypes { get; } = new();
-        public ObservableCollection<Diet> Diets { get; } = new();
+        public ObservableCollection<Filter> MealTypes { get; } = new();
+        public ObservableCollection<Filter> Diets { get; } = new();
         public ObservableCollection<Filter> HealthLabels { get; } = new();
-        public RecipesViewModel(RecipeAPIService recipeService, FiltersDBService filterService, MealTypeDBService mealTypeService, DietDBService dietService, IConnectivity connectivity)
+        public RecipesViewModel(RecipeAPIService recipeService, FiltersDBService filterService, IConnectivity connectivity)
         {
             //Title = "Recipes";
 
             this.recipeService = recipeService;
-            this.mealTypeService = mealTypeService;
-            this.dietService = dietService;
             this.filterService = filterService;
             this.connectivity = connectivity;
 
-            //MealType.Add(new MealTypes() { Name = "Lunch" });
-            //MealType.Add(new MealTypes() { Name = "Dinner" });
 
             // Load data when the page appears
             IsRefreshing = true;
 
             // add filter options
-            MealTypes = mealTypeService.GetAllMealTypes();
-            Diets = dietService.GetAllDiets();
-            HealthLabels = filterService.GetAllFilters("health");
-            //GetMealTypes();
-            //GetDiets();
-            //GetHealthLabels();
+            MealTypes = filterService.GetFiltersByType("mealType");
+            Diets = filterService.GetFiltersByType("diet");
+            HealthLabels = filterService.GetFiltersByType("health");
 
             Task.Run(SearchRecipesAsync);
 
@@ -60,24 +51,6 @@ namespace smilecook.ViewModels
 
         [ObservableProperty]
         bool filtersVisibility;
-        private void GetMealTypes()
-        {
-            MealTypes.Add(new MealType() { Name = "Breakfast" });
-            MealTypes.Add(new MealType() { Name = "Lunch" });
-            MealTypes.Add(new MealType() { Name = "Dinner" });
-        }
-        private void GetDiets()
-        {
-            Diets.Add(new Diet() { Name = "balanced" });
-            Diets.Add(new Diet() { Name = "high-protein" });
-            Diets.Add(new Diet() { Name = "low-sodium" });
-        }
-        private void GetHealthLabels()
-        {
-            /*HealthLabels.Add(new Health() { Name = "vegan" });
-            HealthLabels.Add(new Health() { Name = "vegetarian" });
-            HealthLabels.Add(new Health() { Name = "wheat-free" });*/
-        }
 
         [RelayCommand]
         async Task SearchRecipesAsync()
