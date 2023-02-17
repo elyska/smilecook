@@ -26,7 +26,7 @@
             <Label Text="Meal Type" Style="{StaticResource Title}" />
             <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:MealType" >
+                    <DataTemplate x:DataType="model:Filter" >
 
                         <HorizontalStackLayout>
 
@@ -42,7 +42,7 @@
             <Label Text="Diets" Style="{StaticResource Title}" />
             <CollectionView ItemsSource="{Binding Diets}"  ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Diet" >
+                    <DataTemplate x:DataType="model:Filter" >
 
                         <HorizontalStackLayout>
 
@@ -58,7 +58,7 @@
             <Label Text="Health" Style="{StaticResource Title}" />
             <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Health" >
+                    <DataTemplate x:DataType="model:Filter" >
 
                         <HorizontalStackLayout>
 

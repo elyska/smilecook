@@ -19,18 +19,20 @@ namespace smilecook.ViewModels
         RecipeAPIService recipeService;
         MealTypeDBService mealTypeService;
         DietDBService dietService;
+        FiltersDBService filterService;
 
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
         public ObservableCollection<MealType> MealTypes { get; } = new();
         public ObservableCollection<Diet> Diets { get; } = new();
-        public ObservableCollection<Health> HealthLabels { get; } = new();
-        public RecipesViewModel(RecipeAPIService recipeService, MealTypeDBService mealTypeService, DietDBService dietService, IConnectivity connectivity)
+        public ObservableCollection<Filter> HealthLabels { get; } = new();
+        public RecipesViewModel(RecipeAPIService recipeService, FiltersDBService filterService, MealTypeDBService mealTypeService, DietDBService dietService, IConnectivity connectivity)
         {
             //Title = "Recipes";
 
             this.recipeService = recipeService;
             this.mealTypeService = mealTypeService;
             this.dietService = dietService;
+            this.filterService = filterService;
             this.connectivity = connectivity;
 
             //MealType.Add(new MealTypes() { Name = "Lunch" });
@@ -40,11 +42,12 @@ namespace smilecook.ViewModels
             IsRefreshing = true;
 
             // add filter options
-            //GetMealTypes();
             MealTypes = mealTypeService.GetAllMealTypes();
             Diets = dietService.GetAllDiets();
+            HealthLabels = filterService.GetAllFilters("health");
+            //GetMealTypes();
             //GetDiets();
-            GetHealthLabels();
+            //GetHealthLabels();
 
             Task.Run(SearchRecipesAsync);
 
@@ -71,9 +74,9 @@ namespace smilecook.ViewModels
         }
         private void GetHealthLabels()
         {
-            HealthLabels.Add(new Health() { Name = "vegan" });
+            /*HealthLabels.Add(new Health() { Name = "vegan" });
             HealthLabels.Add(new Health() { Name = "vegetarian" });
-            HealthLabels.Add(new Health() { Name = "wheat-free" });
+            HealthLabels.Add(new Health() { Name = "wheat-free" });*/
         }
 
         [RelayCommand]
