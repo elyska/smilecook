@@ -43,6 +43,7 @@ namespace smilecook.ViewModels
             Task.Run(SearchRecipesAsync);
 
         }
+        public bool IsFilterCounterVisible => FilterCounter != 0;
         [ObservableProperty]
         bool isRefreshing;
 
@@ -50,11 +51,24 @@ namespace smilecook.ViewModels
         string searchTerm;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsFilterCounterVisible))]
+        int filterCounter;
+
+        [ObservableProperty]
         bool filtersVisibility;
+
+        int CountFilters(List<string> mealTypes, List<string> diets, List<string> healthLabels)
+        {
+            return mealTypes.Count() + diets.Count() + healthLabels.Count();
+        }
 
         [RelayCommand]
         async Task SearchRecipesAsync()
         {
+            IsRefreshing = true;
+            if (IsBusy)
+                return;
+
             Debug.WriteLine("SearchTerm");
             Debug.WriteLine(SearchTerm);
 
@@ -66,9 +80,8 @@ namespace smilecook.ViewModels
             // health filters
             var selectedHealth = HealthLabels.Where(x => x.IsSelected).Select(x => x.Name).ToList();
 
-            IsRefreshing = true;
-            if (IsBusy)
-                return;
+            FilterCounter = CountFilters(selectedMealTypes, selectedDiets, selectedHealth);
+
 
             try
             {

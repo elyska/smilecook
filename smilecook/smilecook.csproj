@@ -54,6 +54,8 @@
 	  <None Remove="Resources\Images\cutlery.svg" />
 	  <None Remove="Resources\Images\cutlery_yellow.png" />
 	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\filter.png" />
+	  <None Remove="Resources\Images\filter.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\open_in_new_1.png" />

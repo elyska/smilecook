@@ -98,6 +98,22 @@
                 Radius="3"
                 Opacity="0.6"/>
 
+            <Style x:Key="BadgeLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="white"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style x:Key="Badge" TargetType="Border">
+                <Setter Property="Background" Value="red" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="35, 3, 0, 30"/>
+            </Style>
+
             <Style x:Key="RecipeCard" TargetType="Border">
                 <Setter Property="Background" Value="white" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 10"/>

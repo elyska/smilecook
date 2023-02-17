@@ -15,11 +15,20 @@
     <StackLayout>
         <HorizontalStackLayout>
             <SearchBar Placeholder="Search recipes..."
-                   x:Name="searchBar"
                    Text="{Binding SearchTerm}"
                    SearchCommand="{Binding SearchRecipesCommand}"
                    Style="{StaticResource SearchField}" />
-            <Button Text="Filters" Command="{Binding ChangeFiltersVisibilityCommand}"/>
+            <!--<Button Text="Filters" Command="{Binding ChangeFiltersVisibilityCommand}"/>-->
+            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto">
+                <ImageButton Grid.Column="0" Grid.ColumnSpan="2" 
+                             Grid.Row="0" Grid.RowSpan="2" Source="filter.svg"  
+                             Command="{Binding ChangeFiltersVisibilityCommand}"/>
+                <Border Grid.Column="1" 
+                        Style="{StaticResource Badge}"
+                        IsVisible="{Binding IsFilterCounterVisible}">
+                    <Label Text="{Binding FilterCounter}" Style="{StaticResource BadgeLabel}"/>
+                </Border>
+            </Grid>
         </HorizontalStackLayout>
 
         <VerticalStackLayout IsVisible="{Binding FiltersVisibility}">
