@@ -1,11 +1,17 @@
-﻿namespace smilecook;
+﻿using smilecook.Models;
+using smilecook.Services;
+
+namespace smilecook;
 
 public partial class App : Application
 {
-	public App()
+    public static MealTypeDBService MealTypeService { get; private set; }
+    public App(MealTypeDBService mealTypeService)
 	{
 		InitializeComponent();
 
 		MainPage = new AppShell();
+
+		MealTypeService = mealTypeService;
 	}
 }

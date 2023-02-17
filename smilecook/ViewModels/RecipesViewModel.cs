@@ -16,17 +16,19 @@ namespace smilecook.ViewModels
     public partial class RecipesViewModel : BaseViewModel
     {
         IConnectivity connectivity;
-        RecipeService recipeService;
+        RecipeAPIService recipeService;
+        MealTypeDBService mealTypeService;
 
         public ObservableCollection<RecipeDetails> Recipes { get; } = new();
         public ObservableCollection<MealType> MealTypes { get; } = new();
         public ObservableCollection<Diet> Diets { get; } = new();
         public ObservableCollection<Health> HealthLabels { get; } = new();
-        public RecipesViewModel(RecipeService recipeService, IConnectivity connectivity)
+        public RecipesViewModel(RecipeAPIService recipeService, MealTypeDBService mealTypeService, IConnectivity connectivity)
         {
             //Title = "Recipes";
 
             this.recipeService = recipeService;
+            this.mealTypeService = mealTypeService;
             this.connectivity = connectivity;
 
             //MealType.Add(new MealTypes() { Name = "Lunch" });
@@ -36,7 +38,8 @@ namespace smilecook.ViewModels
             IsRefreshing = true;
 
             // add filter options
-            GetMealTypes();
+            //GetMealTypes();
+            MealTypes = mealTypeService.GetAllMealTypes();
             GetDiets();
             GetHealthLabels();
 
