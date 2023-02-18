@@ -53,7 +53,9 @@
 
                             <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
                                 <Border Style="{StaticResource AddButton}">
-                                    <ImageButton Source="add.svg" />
+                                    <ImageButton Source="add.svg" 
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                                 CommandParameter="{Binding .}"/>
                                 </Border>
                                 <Label Text="{Binding .}" Style="{StaticResource IconLabel}" />
                             </HorizontalStackLayout>

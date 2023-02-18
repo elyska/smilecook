@@ -32,6 +32,8 @@ namespace smilecook.Services
         }
         public void InsertItem(string ingredient)
         {
+            Debug.WriteLine("Insert function");
+            Debug.WriteLine(ingredient);
             int result = 0;
             try
             {
