@@ -71,13 +71,12 @@
                 <Setter Property="Padding" Value="40, 20"/>
             </Style>
             <Style x:Key="IconLabel" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
                 <Setter Property="Spacing" Value="5"/>
                 <Setter Property="Margin" Value="0, 0, 0, 10"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
 
@@ -112,6 +111,15 @@
                 <Setter Property="WidthRequest" Value="20"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="35, 3, 0, 30"/>
+            </Style>
+            
+            <Style x:Key="AddButton" TargetType="Border">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="StrokeShape" Value="Ellipse"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HeightRequest" Value="30"/>
             </Style>
 
             <Style x:Key="RecipeCard" TargetType="Border">

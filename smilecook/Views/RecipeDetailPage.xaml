@@ -51,9 +51,12 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
-                            <VerticalStackLayout>
-                                <Label Text="{Binding .}" />
-                            </VerticalStackLayout>
+                            <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
+                                <Border Style="{StaticResource AddButton}">
+                                    <ImageButton Source="add.svg" />
+                                </Border>
+                                <Label Text="{Binding .}" Style="{StaticResource IconLabel}" />
+                            </HorizontalStackLayout>
 
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
