@@ -1,8 +1,11 @@
-﻿namespace smilecook;
+﻿using smilecook.Models;
+using smilecook.Services;
+
+namespace smilecook;
 
 public partial class App : Application
 {
-	public App()
+    public App()
 	{
 		InitializeComponent();
 

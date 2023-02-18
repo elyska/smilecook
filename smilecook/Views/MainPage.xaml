@@ -13,12 +13,76 @@
     </Page.Behaviors>
 
     <StackLayout>
-        <SearchBar Placeholder="Search recipes..."
-                   x:Name="searchBar"
+        <HorizontalStackLayout>
+            <SearchBar Placeholder="Search recipes..."
+                   Text="{Binding SearchTerm}"
                    SearchCommand="{Binding SearchRecipesCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" 
                    Style="{StaticResource SearchField}" />
+            <!--<Button Text="Filters" Command="{Binding ChangeFiltersVisibilityCommand}"/>-->
+            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto">
+                <ImageButton Grid.Column="0" Grid.ColumnSpan="2" 
+                             Grid.Row="0" Grid.RowSpan="2" Source="filter.svg"  
+                             Command="{Binding ChangeFiltersVisibilityCommand}"/>
+                <Border Grid.Column="1" 
+                        Style="{StaticResource Badge}"
+                        IsVisible="{Binding IsFilterCounterVisible}">
+                    <Label Text="{Binding FilterCounter}" Style="{StaticResource BadgeLabel}"/>
+                </Border>
+            </Grid>
+        </HorizontalStackLayout>
 
+        <VerticalStackLayout IsVisible="{Binding FiltersVisibility}">
+            <Label Text="Meal Type" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Filter" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Diets" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="VerticalGrid, 2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Filter" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Health" Style="{StaticResource Title}" />
+            <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="VerticalGrid, 2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Filter" >
+
+                        <HorizontalStackLayout>
+
+                            <CheckBox x:Name="{Binding Name}" CheckedChanged="OnCheckBoxCheckedChanged" IsChecked="{Binding IsSelected}"/>
+                            <Label Text="{Binding Name}" Style="{StaticResource CheckboxLabel}" />
+
+                        </HorizontalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+        
+        
         <RefreshView Command="{Binding SearchRecipesCommand}"
                      CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                      IsRefreshing="{Binding IsRefreshing}">
@@ -27,6 +91,12 @@
                         SelectionMode="None"
                         Style="{StaticResource MainLayout}">
 
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label Text="Sorry, no recipes found" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:RecipeDetails">
 
@@ -38,14 +108,26 @@
                             </Border.GestureRecognizers>
                             
                             <Grid ColumnDefinitions="Auto, *"
-                              RowDefinitions="*" 
+                              RowDefinitions="*,Auto" 
                               ColumnSpacing="10">
                                 <Image Style="{StaticResource ThumbnailImage}"
                                    Grid.Column="0"
+                                   Grid.RowSpan="2"
                                    Source="{Binding Image}" />
                                 <Label Text="{Binding Label}"
                                    Style="{StaticResource CardTitle}" 
                                    Grid.Column="1"/>
+
+                                <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="Auto, Auto" ColumnSpacing="15" Padding="0,0,10,0">
+                                    <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}" >
+                                        <Image Source="energy.png" Style="{StaticResource Icon}"/>
+                                        <Label Text="{Binding Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabel}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Column="1" Style="{StaticResource IconLabelContainer}">
+                                        <Image Source="clock.png" Style="{StaticResource Icon}"/>
+                                        <Label Text="{Binding TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
                             </Grid>
                         </Border>
 

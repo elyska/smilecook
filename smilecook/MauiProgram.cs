@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using smilecook.Helpers;
+using smilecook.Models;
 using smilecook.Services;
 using smilecook.ViewModels;
 using smilecook.Views;
@@ -27,13 +29,16 @@ public static class MauiProgram
         builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 #endif
 
-        builder.Services.AddSingleton<RecipeService>();
+        builder.Services.AddSingleton<RecipeAPIService>();
 
         builder.Services.AddSingleton<RecipesViewModel>();
         builder.Services.AddTransient<RecipeDetailViewModel>();
 
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
+        
+        string dbPath = FileAccessHelper.GetLocalFilePath("database.db3");
+        builder.Services.AddSingleton<FiltersDBService>(s => ActivatorUtilities.CreateInstance<FiltersDBService>(s, dbPath));
 
         return builder.Build();
 	}

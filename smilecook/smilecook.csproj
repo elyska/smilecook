@@ -32,7 +32,8 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\Images\cutlery.svg" Color="#FFC439" Resize="false" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFC439" />
+		<!--<MauiIcon Include="Resources\Images\cutlery.svg" Color="#FFC439" Resize="false" />-->
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Images\logo.svg" Color="#FFC439" />
@@ -53,6 +54,8 @@
 	  <None Remove="Resources\Images\cutlery.svg" />
 	  <None Remove="Resources\Images\cutlery_yellow.png" />
 	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\filter.png" />
+	  <None Remove="Resources\Images\filter.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\open_in_new_1.png" />
@@ -66,6 +69,8 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
 	</ItemGroup>
 
 	<ItemGroup>
