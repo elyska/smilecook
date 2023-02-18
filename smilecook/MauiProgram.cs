@@ -32,11 +32,12 @@ public static class MauiProgram
         // viewmodels
         builder.Services.AddSingleton<RecipesViewModel>();
         builder.Services.AddTransient<RecipeDetailViewModel>();
+        builder.Services.AddSingleton<ShoppingListViewModel>();
 
         // pages
         builder.Services.AddSingleton<MainPage>();
-        builder.Services.AddSingleton<ShoppingListPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
+        builder.Services.AddSingleton<ShoppingListPage>();
         
         // services
         builder.Services.AddSingleton<RecipeAPIService>();

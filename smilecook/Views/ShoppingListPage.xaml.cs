@@ -1,9 +1,12 @@
+using smilecook.ViewModels;
+
 namespace smilecook.Views;
 
 public partial class ShoppingListPage : ContentPage
 {
-	public ShoppingListPage()
+	public ShoppingListPage(ShoppingListViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 	}
 }
