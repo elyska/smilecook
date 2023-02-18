@@ -78,7 +78,6 @@ namespace smilecook.Services
                 if (string.IsNullOrEmpty(name))
                     throw new Exception("Valid name required");
 
-                // enter this line
                 result = conn.Insert(new Filter { Name = name, Type = type });
 
                 Debug.WriteLine($"{result} record(s) added (Name: {name}, Type: {type})");
