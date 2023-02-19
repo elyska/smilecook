@@ -6,9 +6,12 @@
              x:DataType="viewmodel:ShoppingListViewModel"
              x:Class="smilecook.Views.ShoppingListPage"
              Title="ShoppingListPage">
-    <VerticalStackLayout>
-        <Label Text="Shopping List" Style="{StaticResource Title}" />
-        <CollectionView ItemsSource="{Binding ShoppingList}"
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Shopping List" Style="{StaticResource Title}" />
+
+            <CollectionView ItemsSource="{Binding ShoppingList}"
                         SelectionMode="None">
 
             <CollectionView.EmptyView>
@@ -19,10 +22,21 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ShoppingList">
-                    <Label Text="{Binding Ingredient}" />
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
+                        <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Ingredient}" Style="{StaticResource ShoppingListItemLabel}"/>
+                        <Border Grid.Column="1" Grid.RowSpan="2"  Style="{StaticResource AddButton}">
+                            <ImageButton Source="delete.svg" />
+                        </Border>
+                    </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+        
+
+       
+
+    </ScrollView>
 </ContentPage>

@@ -70,8 +70,13 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="Padding" Value="40, 20"/>
             </Style>
+            
             <Style x:Key="IconLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            
+            <Style x:Key="ShoppingListItemLabel" TargetType="Label">
+                <Setter Property="Margin" Value="10, 0, 0, 0"/>
             </Style>
 
             <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">

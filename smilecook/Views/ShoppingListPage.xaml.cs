@@ -4,9 +4,21 @@ namespace smilecook.Views;
 
 public partial class ShoppingListPage : ContentPage
 {
-	public ShoppingListPage(ShoppingListViewModel vm)
+    ShoppingListViewModel viewmodel;
+
+    public ShoppingListPage(ShoppingListViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
-	}
+        viewmodel = vm;
+
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        viewmodel.GetItemsCommand.Execute(null);
+    }
+
 }
