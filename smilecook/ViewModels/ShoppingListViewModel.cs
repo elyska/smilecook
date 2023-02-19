@@ -22,21 +22,38 @@ namespace smilecook.ViewModels
 
             ShoppingList = shoppingListService.GetShoppingListItems();
         }
-        [ObservableProperty]
-        bool isRefreshing;
         [RelayCommand]
         void GetItems()
         {
-            IsRefreshing = true;
             Debug.WriteLine("Get items called");
             ShoppingList.Clear();
             var items = shoppingListService.GetShoppingListItems();
-            foreach ( var item in items )
+            foreach (var item in items)
             {
-                ShoppingList.Add( item );
+                ShoppingList.Add(item);
             }
             Debug.WriteLine(ShoppingList.Count());
-            IsRefreshing = false;
+        }
+        [RelayCommand]
+        void DeleteItem(int id)
+        {
+            Debug.WriteLine("Delete items called");
+
+            int rowsAffected = shoppingListService.DeleteItem(id);
+
+            if (rowsAffected > 0)
+            {
+                foreach (var item in ShoppingList)
+                {
+                    if (item.Id == id)
+                    {
+                        ShoppingList.Remove(item);
+                        break;
+                    }
+                }
+            }
+
+            Debug.WriteLine(ShoppingList.Count());
         }
 
     }

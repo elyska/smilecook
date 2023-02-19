@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SQLite.SQLite3;
 
 namespace smilecook.Services
 {
@@ -29,6 +30,22 @@ namespace smilecook.Services
         {
             Init();
             conn.DeleteAll<ShoppingList>();
+        }
+        public int DeleteItem(int id)
+        {
+            try
+            {
+                Init();
+                int rowsAffected = conn.Delete<ShoppingList>(id);
+
+                Debug.WriteLine($"{rowsAffected} record(s) deleted (Id: {id})");
+                return rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to delete {id}. Error: {ex.Message}");
+            }
+            return 0;
         }
         public void InsertItem(string ingredient)
         {

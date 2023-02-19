@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:ShoppingListViewModel"
              x:Class="smilecook.Views.ShoppingListPage"
-             Title="ShoppingListPage">
+             Title="">
 
     <ScrollView>
         <VerticalStackLayout>
@@ -25,7 +25,9 @@
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
                         <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Ingredient}" Style="{StaticResource ShoppingListItemLabel}"/>
                         <Border Grid.Column="1" Grid.RowSpan="2"  Style="{StaticResource AddButton}">
-                            <ImageButton Source="delete.svg" />
+                            <ImageButton Source="delete.svg" 
+                                         CommandParameter="{Binding Id}"
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ShoppingListViewModel}}, Path=DeleteItemCommand}"/>
                         </Border>
                     </Grid>
 
