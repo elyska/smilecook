@@ -50,16 +50,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\add.svg" />
 	  <None Remove="Resources\Images\clock.png" />
 	  <None Remove="Resources\Images\cutlery.svg" />
 	  <None Remove="Resources\Images\cutlery_yellow.png" />
+	  <None Remove="Resources\Images\delete.svg" />
 	  <None Remove="Resources\Images\energy.png" />
 	  <None Remove="Resources\Images\filter.png" />
 	  <None Remove="Resources\Images\filter.svg" />
+	  <None Remove="Resources\Images\list.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\open_in_new_1.png" />
 	  <None Remove="Resources\Images\open_in_new_img.png" />
+	  <None Remove="Resources\Images\plus.svg" />
+	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\weight.png" />
 	  <None Remove="Resources\Images\world.png" />
 	</ItemGroup>
@@ -75,6 +80,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\RecipeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShoppingListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
