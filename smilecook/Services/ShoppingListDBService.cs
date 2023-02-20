@@ -26,7 +26,7 @@ namespace smilecook.Services
             conn = new SQLiteConnection(_dbPath);
             conn.CreateTable<ShoppingList>();
         }
-        public void DeleteAll<ShoppingList>()
+        public void DeleteAll()
         {
             Init();
             conn.DeleteAll<ShoppingList>();

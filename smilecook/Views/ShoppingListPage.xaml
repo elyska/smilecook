@@ -8,7 +8,7 @@
              Title="">
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Style="{StaticResource SpacedVSLayout}">
             <Label Text="Shopping List" Style="{StaticResource Title}" />
 
             <CollectionView ItemsSource="{Binding ShoppingList}"
@@ -16,14 +16,14 @@
 
             <CollectionView.EmptyView>
                 <StackLayout>
-                    <Label Text="You haven't added any items to your shopping list." />
+                    <Label Text="You don't have any items on your shopping list." />
                 </StackLayout>
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:ShoppingList">
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
-                        <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Ingredient}" Style="{StaticResource ShoppingListItemLabel}"/>
+                        <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Ingredient}" />
                         <Border Grid.Column="1" Grid.RowSpan="2"  Style="{StaticResource AddButton}">
                             <ImageButton Source="delete.svg" 
                                          CommandParameter="{Binding Id}"
@@ -35,6 +35,8 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+
+            <Button Text="Delete All" Command="{Binding DeleteAllCommand}" IsVisible="{Binding DeleteButtonVisible}" />
         </VerticalStackLayout>
         
 

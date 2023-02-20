@@ -21,7 +21,12 @@ namespace smilecook.ViewModels
             this.shoppingListService = shoppingListService;
 
             ShoppingList = shoppingListService.GetShoppingListItems();
+
+            DeleteButtonVisible = ShoppingList.Count > 0;
         }
+        [ObservableProperty]
+        bool deleteButtonVisible;
+
         [RelayCommand]
         void GetItems()
         {
@@ -32,7 +37,11 @@ namespace smilecook.ViewModels
             {
                 ShoppingList.Add(item);
             }
-            Debug.WriteLine(ShoppingList.Count());
+            if (ShoppingList.Count > 0)
+            {
+                DeleteButtonVisible = true;
+            }
+            Debug.WriteLine(ShoppingList.Count);
         }
         [RelayCommand]
         void DeleteItem(int id)
@@ -51,9 +60,21 @@ namespace smilecook.ViewModels
                         break;
                     }
                 }
+                if (ShoppingList.Count == 0)
+                {
+                    DeleteButtonVisible = false;
+                }
             }
 
-            Debug.WriteLine(ShoppingList.Count());
+            Debug.WriteLine(ShoppingList.Count);
+        }
+
+        [RelayCommand]
+        void DeleteAll()
+        {
+            shoppingListService.DeleteAll();
+            ShoppingList.Clear();
+            DeleteButtonVisible = false;
         }
 
     }

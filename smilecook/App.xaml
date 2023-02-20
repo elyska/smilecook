@@ -43,7 +43,7 @@
             <Style x:Key="Title" TargetType="Label">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
             </Style>
             
             <Style x:Key="CheckboxLabel" TargetType="Label">
@@ -75,9 +75,6 @@
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
             
-            <Style x:Key="ShoppingListItemLabel" TargetType="Label">
-                <Setter Property="Margin" Value="10, 0, 0, 0"/>
-            </Style>
 
             <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
                 <Setter Property="Spacing" Value="5"/>
@@ -90,6 +87,11 @@
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
+
+            <Style x:Key="SpacedVSLayout" TargetType="VerticalStackLayout">
+                <Setter Property="Padding" Value="15"/>
+            </Style>
+            
             <Style TargetType="View" x:Key="MainLayout"
                    ApplyToDerivedTypes="true">
                 <Setter Property="Background" Value="{StaticResource Background}" />
