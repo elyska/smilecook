@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace smilecook.Services
 {
+
     public class RecipeAPIService
     {
+        FavouritesDBService favouritesDBService;
         HttpClient httpClient;
 
         string url = "https://api.edamam.com/api/recipes/v2";
@@ -22,8 +24,10 @@ namespace smilecook.Services
             {"type","public" },
         };
 
-        public RecipeAPIService()
+        public RecipeAPIService(FavouritesDBService favouritesDBService)
         {
+            this.favouritesDBService = favouritesDBService;
+
             httpClient = new HttpClient();
 
             url = QueryHelpers.AddQueryString(url, queryParams); // add default query parameters
@@ -78,6 +82,12 @@ namespace smilecook.Services
                 var content = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine("content");
                 Debug.WriteLine(content);
+
+                foreach (RecipeHits hit in result.Hits)
+                {
+                    Debug.WriteLine(hit.Recipe.Label);
+                    hit.Recipe.IsFavourite = favouritesDBService.IsFavourite(hit.Recipe.Url);
+                }
             }
 
             return result.Hits;

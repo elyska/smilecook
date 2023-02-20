@@ -16,13 +16,33 @@ namespace smilecook.ViewModels
     public partial class RecipeDetailViewModel : BaseViewModel
     {
         ShoppingListDBService shoppingListService;
-        public RecipeDetailViewModel(ShoppingListDBService shoppingListService) 
+        FavouritesDBService favouritesDBService;
+
+        public RecipeDetailViewModel(ShoppingListDBService shoppingListService, FavouritesDBService favouritesDBService) 
         { 
             this.shoppingListService = shoppingListService;
+            this.favouritesDBService = favouritesDBService;
+            //Recipe = new RecipeDetails();
+            //Recipe.IsFavourite = favouritesDBService.IsFavourite(Recipe.Url);
         }
 
         [ObservableProperty]
         RecipeDetails recipe;
+
+
+        [RelayCommand]
+        void AddToFavourites()
+        {
+            Debug.WriteLine("Add to favourites command");
+            favouritesDBService.InsertFavourite(Recipe.Url, Recipe.Label);
+            Recipe.IsFavourite = true;
+            //OnPropertyChanged();
+        }
+
+        public void GetIsFavourite()
+        {
+            //IsFavourite = favouritesDBService.IsFavourite(Recipe.Url);
+        }
 
         [RelayCommand]
         void AddToShoppingList(string ingredient)

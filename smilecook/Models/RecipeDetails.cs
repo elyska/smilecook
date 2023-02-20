@@ -19,5 +19,6 @@ namespace smilecook.Models
         public double Calories { get; set; }
         public double TotalTime { get; set; }
         public double TotalWeight { get; set; }
+        public bool IsFavourite { get; set; }
     }
 }

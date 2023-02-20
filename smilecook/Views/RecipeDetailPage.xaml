@@ -4,10 +4,12 @@
              x:Class="smilecook.Views.RecipeDetailPage"
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:RecipeDetailViewModel"
-             Title="{Binding Title}">
+             Title="{Binding Title}" >
     <!--Shell.NavBarIsVisible="False"-->
     <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout>
+            <Button Text="Add to Favourites" Command="{Binding AddToFavouritesCommand}"/>
+            <Image Source="star.svg" IsVisible="{Binding Recipe.IsFavourite}" />
 
             <Grid ColumnDefinitions="*"
                   RowDefinitions="*, Auto, 40">

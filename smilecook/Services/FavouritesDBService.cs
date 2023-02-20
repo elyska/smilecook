@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SQLite.SQLite3;
 
 namespace smilecook.Services
 {
@@ -48,10 +49,24 @@ namespace smilecook.Services
 
         public bool IsFavourite(string url)
         {
-            var result = conn.Table<Favourite>().Where(i => i.Url == url);
-            Debug.WriteLine(result);
+            Debug.WriteLine("url");
+            Debug.WriteLine(url);
+            try
+            {
+                Init();
+                var result = conn.Table<Favourite>().Where(i => i.Url == url);
+                Debug.WriteLine("Favourites result.Count()");
+                Debug.WriteLine(result.Count());
+                //return true;
+                return result.Count() > 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to find {url}. Error: {ex.Message}");
+            }
+            
 
-            return true;
+            return false;
         }
 
         public int DeleteFavourite(int id)
