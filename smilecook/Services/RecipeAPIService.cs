@@ -32,6 +32,40 @@ namespace smilecook.Services
 
             url = QueryHelpers.AddQueryString(url, queryParams); // add default query parameters
         }
+        public async Task<RecipeDetails> SearchFavouriteRecipe(string label, string recipeUrl)
+        {
+            string requestUrl = url;
+
+            // add search term to query params
+            var optionalQueryParams = new Dictionary<string, string>()
+                {
+                    {"q", label }
+                };
+            requestUrl = QueryHelpers.AddQueryString(requestUrl, optionalQueryParams);
+
+            var response = await httpClient.GetAsync(requestUrl);
+
+            RecipeResponse result = new RecipeResponse();
+            RecipeDetails recipe = new RecipeDetails();
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
+
+                // get recipe details of the favourite recipe (recipeUrl must match)
+                foreach (RecipeHits item in result.Hits)
+                { 
+                    if (item.Recipe.Url == recipeUrl)
+                    {
+                        Debug.WriteLine("Recipe found");
+                        item.Recipe.IsFavourite = true;
+                        recipe = item.Recipe;
+                        break;
+                    }
+                }
+            }
+
+            return recipe;
+        }
         public async Task<List<RecipeHits>> SearchRecipes(string searchTerm, List<string> mealTypes, List<string> diets, List<string> health) 
         {
             string requestUrl = url;
