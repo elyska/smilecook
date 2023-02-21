@@ -14,8 +14,11 @@ namespace smilecook.Services
 {
     public class MyRecipesDBService : DBService
     {
-        public MyRecipesDBService(string dbpath) : base(dbpath)
+        MyIngredientDBService myIngredientDBService;
+        public MyRecipesDBService(string dbpath, MyIngredientDBService myIngredientDBService) : base(dbpath)
         {
+            this.myIngredientDBService = myIngredientDBService;
+
         }
         private void Init()
         {
@@ -25,9 +28,13 @@ namespace smilecook.Services
             conn = new SQLiteConnection(_dbPath);
             conn.CreateTable<MyRecipe>();
         }
-        public void InsertRecipe(MyRecipe myRecipe)
+        public void DeleteAll()
         {
-            int result = 0;
+            Init();
+            conn.DeleteAll<MyRecipe>();
+        }
+        public int InsertRecipe(MyRecipe myRecipe)
+        {
             try
             {
                 Init();
@@ -35,18 +42,25 @@ namespace smilecook.Services
                 if (myRecipe is null)
                     throw new Exception("Valid myRecipe required");
 
-                result = conn.Insert(new MyRecipe { Label = myRecipe.Label, Image = myRecipe.Image, Instructions = myRecipe.Instructions });
+                var result = conn.Insert(new MyRecipe { Label = myRecipe.Label, Image = myRecipe.Image, Instructions = myRecipe.Instructions });
+                //var result = conn.Query<MyRecipe>("INSERT INTO myRecipes(Label, Image, Instructions) VALUES (?, ?, ?) ", myRecipe.Label, myRecipe.Image, myRecipe.Instructions);
+                var newlyAdded = conn.Table<MyRecipe>().Where(i => i.Label == myRecipe.Label);
 
-                Debug.WriteLine($"{result} record(s) added (Label: {myRecipe.Label}, Image: {myRecipe.Image})");
+                Debug.WriteLine($"Id {newlyAdded.FirstOrDefault().Id}");
+                Debug.WriteLine($"{result} record(s) added (Label: {myRecipe.Label}, Image: {myRecipe.Image}, Id: )");
+                return newlyAdded.FirstOrDefault().Id;
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Failed to add. Error: {ex.Message}");
             }
+            return 0;
         }
 
         public ObservableCollection<MyRecipeImageSource> GetAllMyRecipes()
         {
+            Debug.WriteLine("GetAllMyRecipes called");
             try
             {
                 Init();
@@ -67,12 +81,15 @@ namespace smilecook.Services
                     {
                         source = ImageSource.FromFile("placeholder.png");
                     }
+                    
 
                     MyRecipeImageSource newRecipe = new MyRecipeImageSource()
                     {
                         ImgSource = source,
+                        Id = recipe.Id,
                         Label = recipe.Label,
-                        Instructions = recipe.Instructions
+                        Instructions = recipe.Instructions,
+                        Ingredients = myIngredientDBService.GetIngredientsByRecipeId(recipe.Id)
                     };
                     recipes.Add(newRecipe);
                 }

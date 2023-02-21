@@ -4,9 +4,17 @@ namespace smilecook.Views;
 
 public partial class MyRecipesPage : ContentPage
 {
-	public MyRecipesPage(MyRecipesViewModel vm)
+	MyRecipesViewModel viewmodel;
+    public MyRecipesPage(MyRecipesViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
-	}
+        viewmodel = vm;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        viewmodel.GetAllCommand.Execute(null);
+    }
 }

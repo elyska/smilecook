@@ -8,7 +8,6 @@
              Title="FavouritesPage">
     <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout> 
-            <Label Text="Favourite Recipes" Style="{StaticResource Title}"/>
 
             <CollectionView ItemsSource="{Binding Favourites}"
                             SelectionMode="None">

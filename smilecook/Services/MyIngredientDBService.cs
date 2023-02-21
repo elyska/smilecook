@@ -1,7 +1,9 @@
-﻿using smilecook.Models;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using smilecook.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,6 @@ namespace smilecook.Services
     {
         public MyIngredientDBService(string dbpath) : base(dbpath)
         {
-
         }
         private void Init()
         {
@@ -22,6 +23,11 @@ namespace smilecook.Services
 
             conn = new SQLiteConnection(_dbPath);
             conn.CreateTable<MyIngredient>();
+        }
+        public void DeleteAll()
+        {
+            Init();
+            conn.DeleteAll<MyIngredient>();
         }
 
         public void InsertIngredients(List<MyIngredient> myIngredients)
@@ -43,6 +49,24 @@ namespace smilecook.Services
             {
                 Debug.WriteLine($"Failed to add. Error: {ex.Message}");
             }
+        }
+        public ObservableCollection<MyIngredient> GetIngredientsByRecipeId(int id)
+        {
+            Debug.WriteLine("GetIngredientsByRecipeId called");
+            
+            try
+            {
+                Init();
+                var result = conn.Table<MyIngredient>().Where(i => i.MyRecipeId == id).ToObservableCollection();
+                Debug.WriteLine("MyIngredient result.Count()");
+                Debug.WriteLine(result.Count());
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to find recipeId {id}. Error: {ex.Message}");
+            }
+            return new ObservableCollection<MyIngredient>();
         }
 
     }

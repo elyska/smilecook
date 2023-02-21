@@ -8,8 +8,9 @@
              Title="MyRecipesPage">
     <ScrollView  Style="{StaticResource MainLayout}">
         <VerticalStackLayout>
+            <Button Text="Add Recipe" Command="{Binding GoToAddRecipeCommand}"/>
             <CollectionView ItemsSource="{Binding MyRecipes}"
-                        SelectionMode="None">
+                            SelectionMode="None">
 
             <CollectionView.EmptyView>
                 <StackLayout>

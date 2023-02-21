@@ -43,13 +43,19 @@ namespace smilecook.ViewModels
         [RelayCommand]
         void SaveRecipe()
         {
-            myRecipesDBService.InsertRecipe(MyRecipe);
+            int recipeId = myRecipesDBService.InsertRecipe(MyRecipe);
 
             List<MyIngredient> ingredientList = Ingredients.Cast<MyIngredient>().ToList();
+
+            foreach(var item in ingredientList)
+            {
+                item.MyRecipeId = recipeId;
+            }
             myIngredientDBService.InsertIngredients(ingredientList);
 
             // reset form
             MyRecipe = new MyRecipe();
+            Ingredients.Clear();
             ImgSource = ImageSource.FromFile("placeholder.png");
         }
         [RelayCommand]
@@ -57,8 +63,10 @@ namespace smilecook.ViewModels
         {
             if (Ingredient is null || Ingredient == "") return;
             System.Diagnostics.Debug.WriteLine("Add Ingredient called");
-            MyIngredient newIngredient = new MyIngredient() { IngredientLine = Ingredient, MyRecipeId = MyRecipe.Id };
+            MyIngredient newIngredient = new MyIngredient() { IngredientLine = Ingredient };
             Ingredients.Add(newIngredient);
+            System.Diagnostics.Debug.WriteLine("newIngredient.MyRecipeId");
+            System.Diagnostics.Debug.WriteLine(newIngredient.MyRecipeId);
             Ingredient = "";
         }
 

@@ -25,6 +25,27 @@
                 </Border>
             </Grid>
 
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
+
+                <CollectionView ItemsSource="{Binding Recipe.Ingredients}"
+                            SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MyIngredient">
+                            <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
+                                <Border Style="{StaticResource AddButton}">
+                                    <ImageButton Source="add.svg" 
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                                 CommandParameter="{Binding IngredientLine}"/>
+                                </Border>
+                                <Label Text="{Binding IngredientLine}" Style="{StaticResource IconLabel}" />
+                            </HorizontalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
             <Label Text="{Binding Recipe.Instructions}" Style="{StaticResource ListLayout}" />
 
 
