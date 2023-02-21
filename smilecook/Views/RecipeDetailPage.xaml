@@ -9,6 +9,9 @@
     <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout>
             <Button Text="Add to Favourites" Command="{Binding AddToFavouritesCommand}"/>
+            <Button Text="Delete from Favourites" 
+                    Command="{Binding DeleteFromFavouritesCommand}"
+                    CommandParameter="{Binding Recipe.Url}"/>
             <Image Source="star.svg" IsVisible="{Binding Recipe.IsFavourite}" />
 
             <Grid ColumnDefinitions="*"

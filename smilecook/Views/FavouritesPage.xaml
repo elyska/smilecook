@@ -10,8 +10,6 @@
         <VerticalStackLayout> 
             <Label Text="Favourite Recipes" Style="{StaticResource Title}"/>
 
-            
-
             <CollectionView ItemsSource="{Binding Favourites}"
                             SelectionMode="None">
 

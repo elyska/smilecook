@@ -35,6 +35,18 @@ namespace smilecook.ViewModels
             favouritesDBService.InsertFavourite(Recipe.Url, Recipe.Label, Recipe.Image);
             Recipe.IsFavourite = true;
         }
+        [RelayCommand]
+        void DeleteFromFavourites(string url)
+        {
+            Debug.WriteLine("Delete from favourites command");
+            // get id of the record in favourites table
+            int id = favouritesDBService.GetId(url);
+            Debug.WriteLine("id");
+            Debug.WriteLine(id);
+
+            favouritesDBService.DeleteFavourite(id);
+            Recipe.IsFavourite = false;
+        }
 
         [RelayCommand]
         void AddToShoppingList(string ingredient)

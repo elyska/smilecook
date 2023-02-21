@@ -68,9 +68,32 @@ namespace smilecook.Services
             {
                 Debug.WriteLine($"Failed to find {url}. Error: {ex.Message}");
             }
-            
+
 
             return false;
+        }
+        public int GetId(string url)
+        {
+            Debug.WriteLine("url");
+            Debug.WriteLine(url);
+            try
+            {
+                Init();
+                var result = conn.Table<Favourite>().Where(i => i.Url == url).ToList();
+                Debug.WriteLine("Favourites result.Count()");
+                Debug.WriteLine(result.Count());
+                if (result.Count() > 0) 
+                {
+                    return result[0].Id;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to find {url}. Error: {ex.Message}");
+            }
+
+            return 0;
         }
 
         public int DeleteFavourite(int id)
