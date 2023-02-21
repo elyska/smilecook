@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="smilecook.Views.RecipeDetailPage"
+             xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
+             x:DataType="viewmodel:RecipeDetailViewModel"
+             Title="{Binding Title}" >
+    <!--Shell.NavBarIsVisible="False"-->
+    <ScrollView Style="{StaticResource MainLayout}">
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*"
+                  RowDefinitions="*, Auto, 40">
+
+                <Image Source="{Binding Recipe.Image}" 
+                        Grid.RowSpan="2"/>
+
+                <ImageButton Grid.Row="0"
+                        Grid.Column="0" 
+                        Style="{StaticResource FavouritesButton}"
+                        Source="star_white.svg" 
+                        Command="{Binding AddToFavouritesCommand}" 
+                        IsVisible="{Binding AddButtonVisible}"/>
+                <ImageButton Grid.Row="0"
+                        Grid.Column="0" 
+                        Style="{StaticResource FavouritesButton}"
+                        Source="star_filled_white.svg"
+                        Command="{Binding DeleteFromFavouritesCommand}"
+                        CommandParameter="{Binding Recipe.Url}" 
+                        IsVisible="{Binding DeleteButtonVisible}"/>
+                
+                <Border Style="{StaticResource TitleBorder}" 
+                        Grid.RowSpan="2"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Recipe.Label}" Style="{StaticResource RecipeTitle}"/>
+                        <Grid ColumnDefinitions="Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Padding="10,0,10,0">
+                            <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="clock.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="energy.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="weight.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding Recipe.TotalWeight, StringFormat='{0:.} g'}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                    
+                </Border>
+
+            </Grid>
+
+
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
+
+                <CollectionView ItemsSource="{Binding Recipe.IngredientLines}"
+                            SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
+                                <Border Style="{StaticResource AddButton}">
+                                    <ImageButton Source="add.svg" 
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                                 CommandParameter="{Binding .}"/>
+                                </Border>
+                                <Label Text="{Binding .}" Style="{StaticResource IconLabel}" />
+                            </HorizontalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Diet Labels" Style="{StaticResource CardTitle}"/>
+                <CollectionView ItemsSource="{Binding Recipe.DietLabels}"
+                                SelectionMode="None"
+                                ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <HorizontalStackLayout>
+                                <Border Style="{StaticResource LabelTag}">
+                                    <Label Text="{Binding .}" />
+                                </Border>
+                            </HorizontalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Health Labels" Style="{StaticResource CardTitle}"/>
+                <CollectionView ItemsSource="{Binding Recipe.HealthLabels}"
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackLayout>
+                                <Border Style="{StaticResource LabelTag}">
+                                    <Label Text="{Binding .}" />
+                                </Border>
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Cuisine" Style="{StaticResource CardTitle}"/>
+
+                <CollectionView ItemsSource="{Binding Recipe.CuisineType}"
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <HorizontalStackLayout Grid.Column="2" Style="{StaticResource IconLabelContainer}">
+                                <Image Source="world.png" Style="{StaticResource Icon}"/>
+                                <Label Text="{Binding .}" Style="{StaticResource IconLabel}"/>
+                            </HorizontalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+
+            <Button Text="Instructions" 
+                    ImageSource="open_in_new_1.png" 
+                    ContentLayout="Right, 10" 
+                    Style="{StaticResource Link}"
+                    Command="{Binding GoToLinkCommand}" 
+                    CommandParameter="{Binding Recipe.Url}">
+            </Button>
+
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+</ContentPage>

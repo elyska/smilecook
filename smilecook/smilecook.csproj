@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>smilecook</ApplicationTitle>
+		<ApplicationTitle>Smilecook</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.smilecook</ApplicationId>
@@ -32,10 +32,11 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFC439" />
+		<!--<MauiIcon Include="Resources\Images\cutlery.svg" Color="#FFC439" Resize="false" />-->
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\logo.svg" Color="#FFC439" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -49,7 +50,47 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\add.svg" />
+	  <None Remove="Resources\Images\clock.png" />
+	  <None Remove="Resources\Images\cutlery.svg" />
+	  <None Remove="Resources\Images\cutlery_yellow.png" />
+	  <None Remove="Resources\Images\delete.svg" />
+	  <None Remove="Resources\Images\energy.png" />
+	  <None Remove="Resources\Images\filter.png" />
+	  <None Remove="Resources\Images\filter.svg" />
+	  <None Remove="Resources\Images\list.svg" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logo.svg" />
+	  <None Remove="Resources\Images\open_in_new_1.png" />
+	  <None Remove="Resources\Images\open_in_new_img.png" />
+	  <None Remove="Resources\Images\plus.svg" />
+	  <None Remove="Resources\Images\search.svg" />
+	  <None Remove="Resources\Images\star.svg" />
+	  <None Remove="Resources\Images\star_filled_white.svg" />
+	  <None Remove="Resources\Images\star_white.svg" />
+	  <None Remove="Resources\Images\weight.png" />
+	  <None Remove="Resources\Images\world.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\FavouritesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RecipeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ShoppingListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -9,6 +9,173 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+     
+
+            <!-- Colours -->
+            <Color x:Key="Primary">#ffc439</Color>
+            <Color x:Key="Shadow">Grey</Color>
+            <Color x:Key="Background">#f7f4f4</Color>
+
+
+            <Style TargetType="Image" x:Key="ThumbnailImage">
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style TargetType="Image" x:Key="Logo">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+            <Style TargetType="Image" x:Key="Icon">
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+
+            <Style x:Key="CardTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Title" TargetType="Label">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
+            </Style>
+            
+            <Style x:Key="CheckboxLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Link" TargetType="Button">
+                <Setter Property="Background" Value="transparent"/>
+                <Setter Property="TextColor" Value="black"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="FavouritesButton" TargetType="Button">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="RecipeTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Background" Value="transparent"/>
+                <!--<Setter Property="Background" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="90"/>-->
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="40, 20"/>
+            </Style>
+            
+            <Style x:Key="IconLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            
+
+            <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
+                <Setter Property="Spacing" Value="5"/>
+                <Setter Property="Margin" Value="0, 0, 0, 10"/>
+            </Style>
+
+
+            <Style x:Key="ListLayout" TargetType="VerticalStackLayout">
+                <Setter Property="Spacing" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+
+            <Style x:Key="SpacedVSLayout" TargetType="VerticalStackLayout">
+                <Setter Property="Padding" Value="15"/>
+            </Style>
+            
+            <Style TargetType="View" x:Key="MainLayout"
+                   ApplyToDerivedTypes="true">
+                <Setter Property="Background" Value="{StaticResource Background}" />
+            </Style>
+
+
+            <Shadow
+                x:Key="CardShadow"
+                Brush="{StaticResource Shadow}"
+                Radius="3"
+                Opacity="0.6"/>
+
+            <Style x:Key="BadgeLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="white"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style x:Key="Badge" TargetType="Border">
+                <Setter Property="Background" Value="red" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="35, 3, 0, 30"/>
+            </Style>
+            
+            <Style x:Key="AddButton" TargetType="Border">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="StrokeShape" Value="Ellipse"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HeightRequest" Value="30"/>
+            </Style>
+
+            <Style x:Key="RecipeCard" TargetType="Border">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="0,0,10,0"/>
+                <Setter Property="Margin" Value="10"/>
+                <!--<Setter Property="Shadow" Value="{StaticResource CardShadow}"/>-->
+            </Style>
+
+            <Style x:Key="TitleBorder" TargetType="Border">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Shadow" Value="{StaticResource CardShadow}"/>
+                <!--
+                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="HasShadow" Value="true"/>
+                <Setter Property="CornerRadius" Value="10"/>-->
+
+                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="MaximumWidthRequest" Value="300"/>
+
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="LabelTag" TargetType="Border">
+                <Setter Property="Background" Value="white"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="15,5"/>
+            </Style>
+
+            <Style x:Key="SearchField" TargetType="SearchBar">
+                <Setter Property="Background" Value="white" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

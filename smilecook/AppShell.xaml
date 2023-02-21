@@ -4,11 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:smilecook"
+    xmlns:views="clr-namespace:smilecook.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
 
+
+    <Shell.TitleView>
+        <Image Source="logo.svg" Style="{StaticResource Logo}"/>
+    </Shell.TitleView>
+
+    <TabBar>
+        <Tab Title="Search" Icon="search.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+        <Tab Title="Favourites" Icon="star.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:FavouritesPage}" />
+        </Tab>
+        <Tab Title="Shopping List" Icon="list.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:ShoppingListPage}" />
+        </Tab>
+    </TabBar>
 </Shell>

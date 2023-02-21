@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="smilecook.Views.FavouritesPage"
+             xmlns:model="clr-namespace:smilecook.Models"
+             xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
+             x:DataType="viewmodel:FavouritesViewModel"
+             Title="FavouritesPage">
+    <ScrollView Style="{StaticResource MainLayout}">
+        <VerticalStackLayout> 
+            <Label Text="Favourite Recipes" Style="{StaticResource Title}"/>
+
+            <CollectionView ItemsSource="{Binding Favourites}"
+                            SelectionMode="None">
+
+                    <CollectionView.EmptyView>
+                        <StackLayout>
+                            <Label Text="You don't have any favourite recipes." />
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Favourite">
+
+                            <Border Style="{StaticResource RecipeCard}">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FavouritesViewModel}}, Path=GoToRecipeDetailCommand}"/>
+                            </Border.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto, *"
+                                  RowDefinitions="*,Auto" 
+                                  ColumnSpacing="10">
+                                    <Image Style="{StaticResource ThumbnailImage}"
+                                       Grid.Column="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding Image}" />
+                                    <Label Text="{Binding Label}"
+                                       Style="{StaticResource CardTitle}" 
+                                       Grid.Column="1"/>
+
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
