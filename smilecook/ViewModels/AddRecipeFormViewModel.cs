@@ -2,11 +2,14 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IntelliJ.Lang.Annotations;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using smilecook.Models;
 using smilecook.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +21,21 @@ namespace smilecook.ViewModels
     public partial class AddRecipeFormViewModel : BaseViewModel
     {
         MyRecipesDBService myRecipesDBService;
-        public AddRecipeFormViewModel(MyRecipesDBService myRecipesDBService)
+        MyIngredientDBService myIngredientDBService;
+        public ObservableCollection<MyIngredient> Ingredients { get; } = new();
+        public AddRecipeFormViewModel(MyRecipesDBService myRecipesDBService, MyIngredientDBService myIngredientDBService)
         {
             this.myRecipesDBService = myRecipesDBService;
+            this.myIngredientDBService = myIngredientDBService; 
+
             MyRecipe = new MyRecipe();
             ImgSource = ImageSource.FromFile("placeholder.png");
         }
         [ObservableProperty]
         MyRecipe myRecipe;
+
+        [ObservableProperty]
+        string ingredient;
 
         [ObservableProperty]
         ImageSource imgSource;
@@ -34,8 +44,22 @@ namespace smilecook.ViewModels
         void SaveRecipe()
         {
             myRecipesDBService.InsertRecipe(MyRecipe);
+
+            List<MyIngredient> ingredientList = Ingredients.Cast<MyIngredient>().ToList();
+            myIngredientDBService.InsertIngredients(ingredientList);
+
+            // reset form
             MyRecipe = new MyRecipe();
-            ImgSource = ImageSource.FromFile("placeholder.png"); 
+            ImgSource = ImageSource.FromFile("placeholder.png");
+        }
+        [RelayCommand]
+        void AddIngredient()
+        {
+            if (Ingredient is null || Ingredient == "") return;
+            System.Diagnostics.Debug.WriteLine("Add Ingredient called");
+            MyIngredient newIngredient = new MyIngredient() { IngredientLine = Ingredient, MyRecipeId = MyRecipe.Id };
+            Ingredients.Add(newIngredient);
+            Ingredient = "";
         }
 
         [RelayCommand]

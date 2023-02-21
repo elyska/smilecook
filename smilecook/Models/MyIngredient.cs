@@ -13,6 +13,7 @@ namespace smilecook.Models
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int MyRecipeId { get; set; }
         public string IngredientLine { get; set; }
     }
 }

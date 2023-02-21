@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:smilecook.Models"
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:AddRecipeFormViewModel"
              x:Class="smilecook.Views.AddRecipeFormPage">
@@ -13,6 +14,26 @@
             <Border Style="{StaticResource RecipeCard}" >
                 <Entry Text="{Binding MyRecipe.Label}" Placeholder="Enter recipe title" ClearButtonVisibility="WhileEditing" />
             </Border>
+
+            <CollectionView ItemsSource="{Binding Ingredients}"
+                        SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:MyIngredient">
+                        <VerticalStackLayout Style="{StaticResource ListLayout}">
+                            <Label Text="{Binding IngredientLine}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <HorizontalStackLayout>
+                <Border Style="{StaticResource RecipeCard}" >
+                    <Entry Text="{Binding Ingredient}" Placeholder="Enter ingredient" ClearButtonVisibility="WhileEditing" />
+                </Border>
+                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"/>
+            </HorizontalStackLayout>
 
             <Border Style="{StaticResource RecipeCard}" >
                 <Editor Text="{Binding MyRecipe.Instructions}" Placeholder="Enter instructions" HeightRequest="200" />

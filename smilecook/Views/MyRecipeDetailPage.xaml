@@ -25,7 +25,7 @@
                 </Border>
             </Grid>
 
-            <Label Text="{Binding Recipe.Instructions}" />
+            <Label Text="{Binding Recipe.Instructions}" Style="{StaticResource ListLayout}" />
 
 
         </VerticalStackLayout>

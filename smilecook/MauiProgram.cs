@@ -54,6 +54,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ShoppingListDBService>(s => ActivatorUtilities.CreateInstance<ShoppingListDBService>(s, dbPath));
         builder.Services.AddSingleton<FavouritesDBService>(s => ActivatorUtilities.CreateInstance<FavouritesDBService>(s, dbPath));
         builder.Services.AddSingleton<MyRecipesDBService>(s => ActivatorUtilities.CreateInstance<MyRecipesDBService>(s, dbPath));
+        builder.Services.AddSingleton<MyIngredientDBService>(s => ActivatorUtilities.CreateInstance<MyIngredientDBService>(s, dbPath));
 
         return builder.Build();
 	}
