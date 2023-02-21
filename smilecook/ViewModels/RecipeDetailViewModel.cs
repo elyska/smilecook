@@ -27,13 +27,26 @@ namespace smilecook.ViewModels
         [ObservableProperty]
         RecipeDetails recipe;
 
+        [ObservableProperty]
+        bool addButtonVisible;
+
+        [ObservableProperty]
+        bool deleteButtonVisible;
+
+        partial void OnRecipeChanged(RecipeDetails value)
+        {
+             AddButtonVisible = !value.IsFavourite;
+             DeleteButtonVisible = value.IsFavourite;
+        }
+
 
         [RelayCommand]
         void AddToFavourites()
         {
             Debug.WriteLine("Add to favourites command");
             favouritesDBService.InsertFavourite(Recipe.Url, Recipe.Label, Recipe.Image);
-            Recipe.IsFavourite = true;
+            AddButtonVisible = false;
+            DeleteButtonVisible = true;
         }
         [RelayCommand]
         void DeleteFromFavourites(string url)
@@ -45,7 +58,8 @@ namespace smilecook.ViewModels
             Debug.WriteLine(id);
 
             favouritesDBService.DeleteFavourite(id);
-            Recipe.IsFavourite = false;
+            AddButtonVisible = true;
+            DeleteButtonVisible = false;
         }
 
         [RelayCommand]
