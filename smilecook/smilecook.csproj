@@ -66,6 +66,8 @@
 	  <None Remove="Resources\Images\plus.svg" />
 	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\star.svg" />
+	  <None Remove="Resources\Images\star_filled_white.svg" />
+	  <None Remove="Resources\Images\star_white.svg" />
 	  <None Remove="Resources\Images\weight.png" />
 	  <None Remove="Resources\Images\world.png" />
 	</ItemGroup>
