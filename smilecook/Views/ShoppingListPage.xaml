@@ -7,7 +7,7 @@
              x:Class="smilecook.Views.ShoppingListPage"
              Title="">
 
-    <ScrollView>
+    <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout Style="{StaticResource SpacedVSLayout}">
             <Label Text="Shopping List" Style="{StaticResource Title}" />
 
@@ -36,7 +36,8 @@
 
         </CollectionView>
 
-            <Button Text="Delete All" Command="{Binding DeleteAllCommand}" IsVisible="{Binding DeleteButtonVisible}" />
+            <Button Text="Delete All" Command="{Binding DeleteAllCommand}" IsVisible="{Binding DeleteButtonVisible}" 
+                    Style="{StaticResource SpacedButton}" />
         </VerticalStackLayout>
         
 

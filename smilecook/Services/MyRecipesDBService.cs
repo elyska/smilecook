@@ -18,7 +18,7 @@ namespace smilecook.Services
         public MyRecipesDBService(string dbpath, MyIngredientDBService myIngredientDBService) : base(dbpath)
         {
             this.myIngredientDBService = myIngredientDBService;
-
+            //DeleteAll();
         }
         private void Init()
         {

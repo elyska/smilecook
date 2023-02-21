@@ -29,18 +29,20 @@
                 <Border Style="{StaticResource RecipeCard}" >
                     <Entry Text="{Binding Ingredient}" Placeholder="Enter ingredient" ClearButtonVisibility="WhileEditing" />
                 </Border>
-                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}"/>
+                <Button Text="Add Ingredient" Command="{Binding AddIngredientCommand}" Style="{StaticResource SpacedButton}"/>
             </HorizontalStackLayout>
 
             <Border Style="{StaticResource RecipeCard}" >
                 <Editor Text="{Binding MyRecipe.Instructions}" Placeholder="Enter instructions" HeightRequest="200" />
             </Border>
 
+            <HorizontalStackLayout>
+                <Button Text="Take Picture" Command="{Binding TakePhotoCommand}" Style="{StaticResource SpacedButton}" />
+                <Button Text="Upload Picture" Command="{Binding UploadPhotoCommand}" Style="{StaticResource SpacedButton}" />
+            </HorizontalStackLayout>
             <Image Source="{Binding ImgSource}" MaximumHeightRequest="200"/>
 
-            <Button Text="Take Picture" Command="{Binding TakePhotoCommand}" />
-            <Button Text="Upload Picture" Command="{Binding UploadPhotoCommand}" />
-            <Button Text="Save Recipe" Command="{Binding SaveRecipeCommand}" />
+            <Button Text="Save Recipe" Command="{Binding SaveRecipeCommand}" Style="{StaticResource SpacedButton}" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -16,6 +16,7 @@ namespace smilecook.Services
     {
         public MyIngredientDBService(string dbpath) : base(dbpath)
         {
+            //DeleteAll();
         }
         private void Init()
         {
