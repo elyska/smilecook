@@ -56,13 +56,21 @@ namespace smilecook.Services
                 foreach (var recipe in result)
                 {
                     Debug.WriteLine(recipe.Label);
-
-                    byte[] imgBytes = Convert.FromBase64String(recipe.Image);
-                    Debug.WriteLine(imgBytes);
+                    ImageSource source;
+                    if (recipe.Image != null)
+                    {
+                        byte[] imgBytes = Convert.FromBase64String(recipe.Image);
+                        Debug.WriteLine(imgBytes);
+                        source = ImageSource.FromStream(() => new MemoryStream(imgBytes));
+                    }
+                    else
+                    {
+                        source = ImageSource.FromFile("placeholder.png");
+                    }
 
                     MyRecipeImageSource newRecipe = new MyRecipeImageSource()
                     {
-                        ImgSource = ImageSource.FromStream(() => new MemoryStream(imgBytes)),
+                        ImgSource = source,
                         Label = recipe.Label
                     };
                     recipes.Add(newRecipe);

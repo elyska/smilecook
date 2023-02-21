@@ -22,20 +22,20 @@ namespace smilecook.ViewModels
         {
             this.myRecipesDBService = myRecipesDBService;
             MyRecipe = new MyRecipe();
+            ImgSource = ImageSource.FromFile("placeholder.png");
         }
         [ObservableProperty]
-        string imgSource;
-
-        [ObservableProperty]
-        ImageSource imgSource2;
-
-        [ObservableProperty]
         MyRecipe myRecipe;
+
+        [ObservableProperty]
+        ImageSource imgSource;
 
         [RelayCommand]
         void SaveRecipe()
         {
             myRecipesDBService.InsertRecipe(MyRecipe);
+            MyRecipe = new MyRecipe();
+            ImgSource = ImageSource.FromFile("placeholder.png"); 
         }
 
         [RelayCommand]
@@ -47,24 +47,17 @@ namespace smilecook.ViewModels
                 var result = await FilePicker.Default.PickAsync(options);
                 if (result != null)
                 {
-                    //if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                        //result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                    //{
                     var stream = await result.OpenReadAsync();
 
-                    byte[] bytes;
+                    // stream to byte string
                     var ms = new MemoryStream();
                     stream.CopyTo(ms);
-                    bytes = ms.ToArray();
+                    byte[] bytes = ms.ToArray();
                     string byteStr = Convert.ToBase64String(bytes);
-                    //System.Diagnostics.Debug.WriteLine($"Image byte string: {byteStr}");
-                    byte[] convertedBytes = Convert.FromBase64String(byteStr);
-                    //ImgSource = byteStr;
                     
-                    ImageSource image = ImageSource.FromStream(() => new MemoryStream(convertedBytes));
-                        System.Diagnostics.Debug.WriteLine($"Image path: {image}");
-                    //}
-                    ImgSource2 = image;
+                    // update image preview
+                    ImgSource =  ImageSource.FromStream(() => new MemoryStream(bytes));
+                    // update recipe image
                     MyRecipe.Image = byteStr;
                 }
 
@@ -90,21 +83,18 @@ namespace smilecook.ViewModels
 
                 if (photo != null)
                 {
-                    // save the file into local storage
-                    string localFilePath = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
-
-                    Stream sourceStream = await photo.OpenReadAsync();
-                    FileStream localFileStream = File.OpenWrite(localFilePath);
-
-                    await sourceStream.CopyToAsync(localFileStream);
-
-                    //ImgSource = localFilePath;
-
-
                     var stream = await photo.OpenReadAsync();
-                    ImageSource image = ImageSource.FromStream(() => stream);
 
-                    ImgSource2 = image;
+                    var ms = new MemoryStream();
+                    stream.CopyTo(ms);
+                    byte[] bytes = ms.ToArray();
+                    string byteStr = Convert.ToBase64String(bytes);
+
+                    // update recipe image
+                    MyRecipe.Image = byteStr;
+
+                    // update image preview
+                    ImgSource = ImageSource.FromStream(() => new MemoryStream(bytes));
                 }
             }
         }

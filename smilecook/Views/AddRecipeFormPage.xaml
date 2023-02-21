@@ -15,11 +15,10 @@
             </Border>
 
             <Border Style="{StaticResource RecipeCard}" >
-                <Editor Placeholder="Enter instructions" HeightRequest="200" />
+                <Editor Text="{Binding MyRecipe.Instructions}" Placeholder="Enter instructions" HeightRequest="200" />
             </Border>
 
-            <Image Source="{Binding ImgSource2}" MaximumHeightRequest="300"/>
-            <Image Source="{Binding ImgSource}" MaximumHeightRequest="300"/>
+            <Image Source="{Binding ImgSource}" MaximumHeightRequest="200"/>
 
             <Button Text="Take Picture" Command="{Binding TakePhotoCommand}" />
             <Button Text="Upload Picture" Command="{Binding UploadPhotoCommand}" />
