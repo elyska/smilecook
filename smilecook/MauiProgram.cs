@@ -35,6 +35,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ShoppingListViewModel>();
         builder.Services.AddSingleton<FavouritesViewModel>();
         builder.Services.AddSingleton<AddRecipeFormViewModel>();
+        builder.Services.AddSingleton<MyRecipesViewModel>();
 
         // pages
         builder.Services.AddSingleton<MainPage>();
@@ -42,6 +43,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ShoppingListPage>();
         builder.Services.AddSingleton<FavouritesPage>();
         builder.Services.AddSingleton<AddRecipeFormPage>();
+        builder.Services.AddSingleton<MyRecipesPage>();
         
         // services
         builder.Services.AddSingleton<RecipeAPIService>();

@@ -27,6 +27,9 @@
         <Tab Title="Add" Icon="add.svg">
             <ShellContent ContentTemplate="{DataTemplate views:AddRecipeFormPage}" />
         </Tab>
+        <Tab Title="My Recipes" Icon="restaurant.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:MyRecipesPage}" />
+        </Tab>
         <Tab Title="Shopping List" Icon="list.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ShoppingListPage}" />
         </Tab>
