@@ -33,8 +33,8 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:MyIngredient">
                             <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
-                                <Border Style="{StaticResource AddButton}">
-                                    <ImageButton Source="add.svg" 
+                                <Border Style="{StaticResource AddButton}" >
+                                    <Button ImageSource="add.svg" 
                                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
                                                  CommandParameter="{Binding IngredientLine}"/>
                                 </Border>
@@ -46,8 +46,10 @@
                 </CollectionView>
             </VerticalStackLayout>
 
-            <Label Text="{Binding Recipe.Instructions}" Style="{StaticResource ListLayout}" />
-
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Instructions" Style="{StaticResource CardTitle}"/>
+                <Label Text="{Binding Recipe.Instructions}" />
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
 
