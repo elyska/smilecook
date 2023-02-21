@@ -23,6 +23,12 @@
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
+
+            <Style TargetType="Image" x:Key="MyRecipeImage">
+                <Setter Property="HeightRequest" Value="400" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
             <Style TargetType="Image" x:Key="Logo">
                 <Setter Property="HeightRequest" Value="30" />
                 <Setter Property="HorizontalOptions" Value="Start" />

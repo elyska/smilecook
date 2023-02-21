@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using smilecook.Models;
 using smilecook.Services;
+using smilecook.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,18 @@ namespace smilecook.ViewModels
             this.myRecipesDBService = myRecipesDBService;
             MyRecipes = myRecipesDBService.GetAllMyRecipes();
 
+        }
+        [RelayCommand]
+        async Task GoToRecipeDetailAsync(MyRecipeImageSource recipe)
+        {
+            if (recipe is null)
+                return;
+
+            await Shell.Current.GoToAsync($"{nameof(MyRecipeDetailPage)}", true,
+                new Dictionary<string, object>
+                {
+                    {"Recipe", recipe}
+                });
         }
 
     }

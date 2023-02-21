@@ -6,11 +6,9 @@
              xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
              x:DataType="viewmodel:MyRecipesViewModel"
              Title="MyRecipesPage">
-    <ScrollView>
-        
-    <VerticalStackLayout>
-        <Label Text="My Recipes" />
-        <CollectionView ItemsSource="{Binding MyRecipes}"
+    <ScrollView  Style="{StaticResource MainLayout}">
+        <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding MyRecipes}"
                         SelectionMode="None">
 
             <CollectionView.EmptyView>
@@ -20,13 +18,25 @@
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:MyRecipeImageSource">
-                    <Grid>
-                        <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Label}" />
-                        <Image Source="{Binding ImgSource}" />
-                    </Grid>
-
-                </DataTemplate>
+                    <DataTemplate x:DataType="model:MyRecipeImageSource">
+                        <Border Style="{StaticResource RecipeCard}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipesViewModel}}, Path=GoToRecipeDetailCommand}"/>
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto, *"
+                                      RowDefinitions="*,Auto" 
+                                      ColumnSpacing="10">
+                                <Image Style="{StaticResource ThumbnailImage}"
+                                       Grid.Column="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding ImgSource}" />
+                                <Label Text="{Binding Label}"
+                                       Style="{StaticResource CardTitle}" 
+                                       Grid.Column="1"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
             </CollectionView.ItemTemplate>
 
         </CollectionView>

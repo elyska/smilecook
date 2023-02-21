@@ -35,7 +35,7 @@ namespace smilecook.Services
                 if (myRecipe is null)
                     throw new Exception("Valid myRecipe required");
 
-                result = conn.Insert(new MyRecipe { Label = myRecipe.Label, Image = myRecipe.Image });
+                result = conn.Insert(new MyRecipe { Label = myRecipe.Label, Image = myRecipe.Image, Instructions = myRecipe.Instructions });
 
                 Debug.WriteLine($"{result} record(s) added (Label: {myRecipe.Label}, Image: {myRecipe.Image})");
             }
@@ -71,7 +71,8 @@ namespace smilecook.Services
                     MyRecipeImageSource newRecipe = new MyRecipeImageSource()
                     {
                         ImgSource = source,
-                        Label = recipe.Label
+                        Label = recipe.Label,
+                        Instructions = recipe.Instructions
                     };
                     recipes.Add(newRecipe);
                 }

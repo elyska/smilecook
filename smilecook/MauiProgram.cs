@@ -36,6 +36,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<FavouritesViewModel>();
         builder.Services.AddSingleton<AddRecipeFormViewModel>();
         builder.Services.AddSingleton<MyRecipesViewModel>();
+        builder.Services.AddTransient<MyRecipeDetailViewModel>();
 
         // pages
         builder.Services.AddSingleton<MainPage>();
@@ -44,7 +45,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<FavouritesPage>();
         builder.Services.AddSingleton<AddRecipeFormPage>();
         builder.Services.AddSingleton<MyRecipesPage>();
-        
+        builder.Services.AddTransient<MyRecipeDetailPage>();
+
         // services
         builder.Services.AddSingleton<RecipeAPIService>();
         string dbPath = FileAccessHelper.GetLocalFilePath("database.db3");
