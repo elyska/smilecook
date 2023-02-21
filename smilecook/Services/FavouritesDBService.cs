@@ -16,7 +16,7 @@ namespace smilecook.Services
     {
         public FavouritesDBService(string dbpath) : base(dbpath) 
         {
-
+            //DeleteAll();
         }
         private void Init()
         {
@@ -27,7 +27,12 @@ namespace smilecook.Services
             conn.CreateTable<Favourite>();
         }
 
-        public void InsertFavourite(string url, string label)
+        public void DeleteAll()
+        {
+            Init();
+            conn.DeleteAll<Favourite>();
+        }
+        public void InsertFavourite(string url, string label, string image)
         {
             int result = 0;
             try
@@ -37,9 +42,9 @@ namespace smilecook.Services
                 if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(label))
                     throw new Exception("Valid url and label required");
 
-                result = conn.Insert(new Favourite { Url = url, Label = label });
+                result = conn.Insert(new Favourite { Url = url, Label = label, Image = image });
 
-                Debug.WriteLine($"{result} record(s) added (Label: {label}, Url: {url})");
+                Debug.WriteLine($"{result} record(s) added (Label: {label}, Url: {url}, Image: {image})");
             }
             catch (Exception ex)
             {
@@ -57,7 +62,6 @@ namespace smilecook.Services
                 var result = conn.Table<Favourite>().Where(i => i.Url == url);
                 Debug.WriteLine("Favourites result.Count()");
                 Debug.WriteLine(result.Count());
-                //return true;
                 return result.Count() > 0;
             }
             catch (Exception ex)

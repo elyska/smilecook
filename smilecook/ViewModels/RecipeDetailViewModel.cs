@@ -22,8 +22,6 @@ namespace smilecook.ViewModels
         { 
             this.shoppingListService = shoppingListService;
             this.favouritesDBService = favouritesDBService;
-            //Recipe = new RecipeDetails();
-            //Recipe.IsFavourite = favouritesDBService.IsFavourite(Recipe.Url);
         }
 
         [ObservableProperty]
@@ -34,14 +32,8 @@ namespace smilecook.ViewModels
         void AddToFavourites()
         {
             Debug.WriteLine("Add to favourites command");
-            favouritesDBService.InsertFavourite(Recipe.Url, Recipe.Label);
+            favouritesDBService.InsertFavourite(Recipe.Url, Recipe.Label, Recipe.Image);
             Recipe.IsFavourite = true;
-            //OnPropertyChanged();
-        }
-
-        public void GetIsFavourite()
-        {
-            //IsFavourite = favouritesDBService.IsFavourite(Recipe.Url);
         }
 
         [RelayCommand]
