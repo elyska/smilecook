@@ -21,6 +21,9 @@
         <Tab Title="Search" Icon="search.svg">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>
+        <Tab Title="Favourites" Icon="star.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:FavouritesPage}" />
+        </Tab>
         <Tab Title="Shopping List" Icon="list.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ShoppingListPage}" />
         </Tab>

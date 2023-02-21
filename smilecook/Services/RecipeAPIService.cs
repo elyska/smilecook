@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace smilecook.Services
 {
+
     public class RecipeAPIService
     {
+        FavouritesDBService favouritesDBService;
         HttpClient httpClient;
 
         string url = "https://api.edamam.com/api/recipes/v2";
@@ -22,11 +24,47 @@ namespace smilecook.Services
             {"type","public" },
         };
 
-        public RecipeAPIService()
+        public RecipeAPIService(FavouritesDBService favouritesDBService)
         {
+            this.favouritesDBService = favouritesDBService;
+
             httpClient = new HttpClient();
 
             url = QueryHelpers.AddQueryString(url, queryParams); // add default query parameters
+        }
+        public async Task<RecipeDetails> SearchFavouriteRecipe(string label, string recipeUrl)
+        {
+            string requestUrl = url;
+
+            // add search term to query params
+            var optionalQueryParams = new Dictionary<string, string>()
+                {
+                    {"q", label }
+                };
+            requestUrl = QueryHelpers.AddQueryString(requestUrl, optionalQueryParams);
+
+            var response = await httpClient.GetAsync(requestUrl);
+
+            RecipeResponse result = new RecipeResponse();
+            RecipeDetails recipe = new RecipeDetails();
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadFromJsonAsync<RecipeResponse>();
+
+                // get recipe details of the favourite recipe (recipeUrl must match)
+                foreach (RecipeHits item in result.Hits)
+                { 
+                    if (item.Recipe.Url == recipeUrl)
+                    {
+                        Debug.WriteLine("Recipe found");
+                        item.Recipe.IsFavourite = true;
+                        recipe = item.Recipe;
+                        break;
+                    }
+                }
+            }
+
+            return recipe;
         }
         public async Task<List<RecipeHits>> SearchRecipes(string searchTerm, List<string> mealTypes, List<string> diets, List<string> health) 
         {
@@ -78,6 +116,12 @@ namespace smilecook.Services
                 var content = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine("content");
                 Debug.WriteLine(content);
+
+                foreach (RecipeHits hit in result.Hits)
+                {
+                    Debug.WriteLine(hit.Recipe.Label);
+                    hit.Recipe.IsFavourite = favouritesDBService.IsFavourite(hit.Recipe.Url);
+                }
             }
 
             return result.Hits;

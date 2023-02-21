@@ -33,17 +33,20 @@ public static class MauiProgram
         builder.Services.AddSingleton<RecipesViewModel>();
         builder.Services.AddTransient<RecipeDetailViewModel>();
         builder.Services.AddSingleton<ShoppingListViewModel>();
+        builder.Services.AddSingleton<FavouritesViewModel>();
 
         // pages
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
         builder.Services.AddSingleton<ShoppingListPage>();
+        builder.Services.AddSingleton<FavouritesPage>();
         
         // services
         builder.Services.AddSingleton<RecipeAPIService>();
         string dbPath = FileAccessHelper.GetLocalFilePath("database.db3");
         builder.Services.AddSingleton<FiltersDBService>(s => ActivatorUtilities.CreateInstance<FiltersDBService>(s, dbPath));
         builder.Services.AddSingleton<ShoppingListDBService>(s => ActivatorUtilities.CreateInstance<ShoppingListDBService>(s, dbPath));
+        builder.Services.AddSingleton<FavouritesDBService>(s => ActivatorUtilities.CreateInstance<FavouritesDBService>(s, dbPath));
 
         return builder.Build();
 	}
