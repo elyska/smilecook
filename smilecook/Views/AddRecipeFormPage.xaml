@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
+             x:DataType="viewmodel:AddRecipeFormViewModel"
              x:Class="smilecook.Views.AddRecipeFormPage">
-    <VerticalStackLayout Style="{StaticResource MainLayout}">
-        <Label 
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource MainLayout}">
+            <Label 
             Text="New Recipe"
             Style="{StaticResource Title}"/>
-        
-        <Border Style="{StaticResource RecipeCard}" >
-            <Entry Placeholder="Enter recipe title" ClearButtonVisibility="WhileEditing" />
-        </Border>
-        
-        <Border Style="{StaticResource RecipeCard}" >
-            <Editor Placeholder="Enter instructions" HeightRequest="200" />
-        </Border>
-        
-    </VerticalStackLayout>
+
+            <Border Style="{StaticResource RecipeCard}" >
+                <Entry Text="{Binding MyRecipe.Label}" Placeholder="Enter recipe title" ClearButtonVisibility="WhileEditing" />
+            </Border>
+
+            <Border Style="{StaticResource RecipeCard}" >
+                <Editor Placeholder="Enter instructions" HeightRequest="200" />
+            </Border>
+
+            <Image Source="{Binding ImgSource2}" MaximumHeightRequest="300"/>
+            <Image Source="{Binding ImgSource}" MaximumHeightRequest="300"/>
+
+            <Button Text="Take Picture" Command="{Binding TakePhotoCommand}" />
+            <Button Text="Upload Picture" Command="{Binding UploadPhotoCommand}" />
+            <Button Text="Save Recipe" Command="{Binding SaveRecipeCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>
