@@ -2,22 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>Samsung SM-A336B (Android 13.0 - API 33)</ActiveDebugProfile>
-    <ActiveDebugFramework>net7.0-android</ActiveDebugFramework>
-    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
-    <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
-    <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
-    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="Views\FavouritesPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Views\RecipeDetailPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Views\ShoppingListPage.xaml">
+    <MauiXaml Update="Views\AddRecipeFormPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

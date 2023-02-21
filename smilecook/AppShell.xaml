@@ -24,6 +24,9 @@
         <Tab Title="Favourites" Icon="star.svg">
             <ShellContent ContentTemplate="{DataTemplate views:FavouritesPage}" />
         </Tab>
+        <Tab Title="Add" Icon="add.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:AddRecipeFormPage}" />
+        </Tab>
         <Tab Title="Shopping List" Icon="list.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ShoppingListPage}" />
         </Tab>

@@ -40,6 +40,7 @@ public static class MauiProgram
         builder.Services.AddTransient<RecipeDetailPage>();
         builder.Services.AddSingleton<ShoppingListPage>();
         builder.Services.AddSingleton<FavouritesPage>();
+        builder.Services.AddSingleton<AddRecipeFormPage>();
         
         // services
         builder.Services.AddSingleton<RecipeAPIService>();

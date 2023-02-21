@@ -1,5 +1,4 @@
-﻿using Android.Icu.Text;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using smilecook.Models;
 using smilecook.Services;
 using smilecook.Views;
@@ -10,7 +9,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Android.Content.ClipData;
 
 namespace smilecook.ViewModels
 {
