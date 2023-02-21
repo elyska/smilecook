@@ -7,9 +7,6 @@
              x:Class="smilecook.Views.AddRecipeFormPage">
     <ScrollView>
         <VerticalStackLayout Style="{StaticResource MainLayout}">
-            <Label 
-            Text="New Recipe"
-            Style="{StaticResource Title}"/>
 
             <Border Style="{StaticResource RecipeCard}" >
                 <Entry Text="{Binding MyRecipe.Label}" Placeholder="Enter recipe title" ClearButtonVisibility="WhileEditing" />

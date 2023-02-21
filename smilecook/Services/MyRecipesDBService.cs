@@ -33,6 +33,22 @@ namespace smilecook.Services
             Init();
             conn.DeleteAll<MyRecipe>();
         }
+        public int DeleteItem(int id)
+        {
+            try
+            {
+                Init();
+                int rowsAffected = conn.Delete<MyRecipe>(id);
+
+                Debug.WriteLine($"{rowsAffected} record(s) deleted (Id: {id})");
+                return rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to delete {id}. Error: {ex.Message}");
+            }
+            return 0;
+        }
         public int InsertRecipe(MyRecipe myRecipe)
         {
             try

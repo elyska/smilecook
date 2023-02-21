@@ -34,6 +34,10 @@
                 <Setter Property="HorizontalOptions" Value="Start" />
             </Style>
 
+            <Style TargetType="StackLayout" x:Key="EmptyView">
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
             <Style TargetType="Image" x:Key="Icon">
                 <Setter Property="HeightRequest" Value="20" />
                 <Setter Property="WidthRequest" Value="20" />
@@ -71,6 +75,11 @@
                 <Setter Property="HorizontalOptions" Value="End"/>
                 <Setter Property="VerticalOptions" Value="Start"/>
             </Style>
+
+            <Style x:Key="SpacedButton" TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            
             <Style x:Key="RecipeTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -141,6 +150,7 @@
                 <Setter Property="Padding" Value="5"/>
                 <Setter Property="WidthRequest" Value="30"/>
                 <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
             </Style>
 
             <Style x:Key="RecipeCard" TargetType="Border">

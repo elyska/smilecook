@@ -15,10 +15,12 @@ namespace smilecook.ViewModels
     public partial class MyRecipesViewModel : BaseViewModel
     {
         MyRecipesDBService myRecipesDBService;
+        MyIngredientDBService myIngredientDBService;
         public ObservableCollection<MyRecipeImageSource> MyRecipes { get; set; } = new();
-        public MyRecipesViewModel(MyRecipesDBService myRecipesDBService) 
+        public MyRecipesViewModel(MyRecipesDBService myRecipesDBService, MyIngredientDBService myIngredientDBService) 
         {
             this.myRecipesDBService = myRecipesDBService;
+            this.myIngredientDBService = myIngredientDBService;
             MyRecipes = myRecipesDBService.GetAllMyRecipes();
         }
         [RelayCommand]
@@ -32,6 +34,32 @@ namespace smilecook.ViewModels
                 MyRecipes.Add(item);
             }
             Debug.WriteLine(MyRecipes.Count());
+        }
+        [RelayCommand]
+        void DeleteRecipe(int id)
+        {
+            Debug.WriteLine("Delete recipe called");
+
+            // delete recipes
+            int rowsAffected = myRecipesDBService.DeleteItem(id);
+
+            if (rowsAffected > 0)
+            {
+                foreach (var item in MyRecipes)
+                {
+                    if (item.Id == id)
+                    {
+                        MyRecipes.Remove(item);
+                        break;
+                    }
+                }
+            }
+
+            Debug.WriteLine(MyRecipes.Count);
+
+            // delete ingredients
+            myIngredientDBService.DeleteByRecipeId(id);
+
         }
 
         [RelayCommand]

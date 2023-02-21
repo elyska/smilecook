@@ -92,8 +92,8 @@
                         Style="{StaticResource MainLayout}">
 
                 <CollectionView.EmptyView>
-                    <StackLayout>
-                        <Label Text="Sorry, no recipes found" />
+                    <StackLayout Style="{StaticResource EmptyView}">
+                        <Image Source="cutlery.svg"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
                 

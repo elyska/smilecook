@@ -12,13 +12,13 @@
             <CollectionView ItemsSource="{Binding Favourites}"
                             SelectionMode="None">
 
-                    <CollectionView.EmptyView>
-                        <StackLayout>
-                            <Label Text="You don't have any favourite recipes." />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
+                <CollectionView.EmptyView>
+                    <StackLayout Style="{StaticResource EmptyView}">
+                        <Image Source="cutlery.svg"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
 
-                    <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Favourite">
 
                             <Border Style="{StaticResource RecipeCard}">

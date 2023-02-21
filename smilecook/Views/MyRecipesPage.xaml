@@ -8,14 +8,16 @@
              Title="MyRecipesPage">
     <ScrollView  Style="{StaticResource MainLayout}">
         <VerticalStackLayout>
-            <Button Text="Add Recipe" Command="{Binding GoToAddRecipeCommand}"/>
+            <Button Text="Add Recipe" 
+                    Command="{Binding GoToAddRecipeCommand}"
+                    Style="{StaticResource SpacedButton}"/>
             <CollectionView ItemsSource="{Binding MyRecipes}"
                             SelectionMode="None">
 
             <CollectionView.EmptyView>
-                <StackLayout>
-                    <Label Text="You don't have any recipes." />
-                </StackLayout>
+                <StackLayout Style="{StaticResource EmptyView}">
+                        <Image Source="cutlery.svg"/>
+                    </StackLayout>
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
@@ -35,6 +37,13 @@
                                 <Label Text="{Binding Label}"
                                        Style="{StaticResource CardTitle}" 
                                        Grid.Column="1"/>
+                                <Border Style="{StaticResource AddButton}"
+                                        Grid.Column="1"
+                                        Grid.Row="0">
+                                    <ImageButton Source="delete.svg"
+                                                 CommandParameter="{Binding Id}"
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipesViewModel}}, Path=DeleteRecipeCommand}"/>
+                                </Border>
                             </Grid>
                         </Border>
                     </DataTemplate>

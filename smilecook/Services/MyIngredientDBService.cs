@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SQLite.SQLite3;
 
 namespace smilecook.Services
 {
@@ -28,6 +29,19 @@ namespace smilecook.Services
         {
             Init();
             conn.DeleteAll<MyIngredient>();
+        }
+        public void DeleteByRecipeId(int id)
+        {
+            try
+            {
+                Init();
+
+                conn.Query<MyIngredient>("DELETE FROM myIngredients WHERE MyRecipeId = ?", id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Failed to delete. Error: {ex.Message}");
+            }
         }
 
         public void InsertIngredients(List<MyIngredient> myIngredients)
