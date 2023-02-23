@@ -63,7 +63,9 @@
 	  <None Remove="Resources\Images\logo.svg" />
 	  <None Remove="Resources\Images\open_in_new_1.png" />
 	  <None Remove="Resources\Images\open_in_new_img.png" />
+	  <None Remove="Resources\Images\placeholder.png" />
 	  <None Remove="Resources\Images\plus.svg" />
+	  <None Remove="Resources\Images\restaurant.svg" />
 	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\star.svg" />
 	  <None Remove="Resources\Images\star_filled_white.svg" />
@@ -82,7 +84,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AddRecipeFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\FavouritesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyRecipeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyRecipesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RecipeDetailPage.xaml">
