@@ -11,8 +11,7 @@
         <VerticalStackLayout Style="{StaticResource SpacedVSLayout}">
             <Label Text="Shopping List" Style="{StaticResource Title}" />
 
-            <CollectionView ItemsSource="{Binding ShoppingList}"
-                        SelectionMode="None">
+            <CollectionView ItemsSource="{Binding ShoppingList}">
 
             <CollectionView.EmptyView>
                 <StackLayout>

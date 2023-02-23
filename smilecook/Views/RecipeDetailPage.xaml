@@ -12,21 +12,21 @@
                   RowDefinitions="*, Auto, 40">
 
                 <Image Source="{Binding Recipe.Image}" 
-                        Grid.RowSpan="2"/>
+                       Grid.RowSpan="2"/>
 
                 <ImageButton Grid.Row="0"
-                        Grid.Column="0" 
-                        Style="{StaticResource FavouritesButton}"
-                        Source="star_white.svg" 
-                        Command="{Binding AddToFavouritesCommand}" 
-                        IsVisible="{Binding AddButtonVisible}"/>
+                             Grid.Column="0" 
+                             Style="{StaticResource FavouritesButton}"
+                             Source="star_white.svg" 
+                             Command="{Binding AddToFavouritesCommand}" 
+                             IsVisible="{Binding AddButtonVisible}"/>
                 <ImageButton Grid.Row="0"
-                        Grid.Column="0" 
-                        Style="{StaticResource FavouritesButton}"
-                        Source="star_filled_white.svg"
-                        Command="{Binding DeleteFromFavouritesCommand}"
-                        CommandParameter="{Binding Recipe.Url}" 
-                        IsVisible="{Binding DeleteButtonVisible}"/>
+                             Grid.Column="0" 
+                             Style="{StaticResource FavouritesButton}"
+                             Source="star_filled_white.svg"
+                             Command="{Binding DeleteFromFavouritesCommand}"
+                             CommandParameter="{Binding Recipe.Url}" 
+                             IsVisible="{Binding DeleteButtonVisible}"/>
                 
                 <Border Style="{StaticResource TitleBorder}" 
                         Grid.RowSpan="2"
@@ -34,7 +34,7 @@
                         Grid.Column="1">
                     <VerticalStackLayout>
                         <Label Text="{Binding Recipe.Label}" Style="{StaticResource RecipeTitle}"/>
-                        <Grid ColumnDefinitions="Auto, Auto, Auto" HorizontalOptions="Center" ColumnSpacing="15" Padding="10,0,10,0">
+                        <Grid ColumnDefinitions="Auto, Auto, Auto" Style="{StaticResource RecipeTitleGrid}">
                             <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}">
                                 <Image Source="clock.png" Style="{StaticResource Icon}"/>
                                 <Label Text="{Binding Recipe.TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
@@ -59,16 +59,15 @@
             <VerticalStackLayout Style="{StaticResource ListLayout}">
                 <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
 
-                <CollectionView ItemsSource="{Binding Recipe.IngredientLines}"
-                            SelectionMode="None">
+                <CollectionView ItemsSource="{Binding Recipe.IngredientLines}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
                             <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
                                 <Border Style="{StaticResource AddButton}">
                                     <Button ImageSource="add.svg" 
-                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
-                                                 CommandParameter="{Binding .}"/>
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                            CommandParameter="{Binding .}"/>
                                 </Border>
                                 <Label Text="{Binding .}" Style="{StaticResource IconLabel}" />
                             </HorizontalStackLayout>
@@ -82,8 +81,7 @@
             <VerticalStackLayout Style="{StaticResource ListLayout}">
                 <Label Text="Diet Labels" Style="{StaticResource CardTitle}"/>
                 <CollectionView ItemsSource="{Binding Recipe.DietLabels}"
-                                SelectionMode="None"
-                                ItemsLayout="HorizontalList">
+                                Style="{StaticResource HorizontalCollection}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
@@ -101,8 +99,7 @@
             <VerticalStackLayout Style="{StaticResource ListLayout}">
                 <Label Text="Health Labels" Style="{StaticResource CardTitle}"/>
                 <CollectionView ItemsSource="{Binding Recipe.HealthLabels}"
-                            SelectionMode="None"
-                            ItemsLayout="HorizontalList">
+                                Style="{StaticResource HorizontalCollection}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
@@ -122,8 +119,7 @@
                 <Label Text="Cuisine" Style="{StaticResource CardTitle}"/>
 
                 <CollectionView ItemsSource="{Binding Recipe.CuisineType}"
-                            SelectionMode="None"
-                            ItemsLayout="HorizontalList">
+                                Style="{StaticResource HorizontalCollection}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
@@ -140,7 +136,6 @@
 
             <Button Text="Instructions" 
                     ImageSource="open_in_new_1.png" 
-                    ContentLayout="Right, 10" 
                     Style="{StaticResource Link}"
                     Command="{Binding GoToLinkCommand}" 
                     CommandParameter="{Binding Recipe.Url}">

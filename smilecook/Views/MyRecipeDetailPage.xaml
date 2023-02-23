@@ -12,8 +12,8 @@
                   RowDefinitions="*, Auto, 20">
 
                 <Image Source="{Binding Recipe.ImgSource}" 
-                        Grid.RowSpan="2"
-                        Style="{StaticResource MyRecipeImage}" />
+                       Grid.RowSpan="2"
+                       Style="{StaticResource MyRecipeImage}" />
 
                 <Border Style="{StaticResource TitleBorder}" 
                         Grid.RowSpan="2"
@@ -28,15 +28,14 @@
             <VerticalStackLayout Style="{StaticResource ListLayout}">
                 <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
 
-                <CollectionView ItemsSource="{Binding Recipe.Ingredients}"
-                            SelectionMode="None">
+                <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:MyIngredient">
                             <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
                                 <Border Style="{StaticResource AddButton}" >
                                     <Button ImageSource="add.svg" 
-                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
-                                                 CommandParameter="{Binding IngredientLine}"/>
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                            CommandParameter="{Binding IngredientLine}"/>
                                 </Border>
                                 <Label Text="{Binding IngredientLine}" Style="{StaticResource IconLabel}" />
                             </HorizontalStackLayout>

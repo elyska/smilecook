@@ -33,7 +33,7 @@
 
         <VerticalStackLayout IsVisible="{Binding FiltersVisibility}">
             <Label Text="Meal Type" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding MealTypes}" ItemsLayout="HorizontalList">
+            <CollectionView ItemsSource="{Binding MealTypes}" Style="{StaticResource HorizontalCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filter" >
 
@@ -49,7 +49,7 @@
             </CollectionView>
 
             <Label Text="Diets" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding Diets}" ItemsLayout="VerticalGrid, 2">
+            <CollectionView ItemsSource="{Binding Diets}" Style="{StaticResource TwoColumnCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filter" >
 
@@ -65,7 +65,7 @@
             </CollectionView>
 
             <Label Text="Health" Style="{StaticResource Title}" />
-            <CollectionView ItemsSource="{Binding HealthLabels}" ItemsLayout="VerticalGrid, 2">
+            <CollectionView ItemsSource="{Binding HealthLabels}" Style="{StaticResource TwoColumnCollection}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Filter" >
 
@@ -88,8 +88,7 @@
                      IsRefreshing="{Binding IsRefreshing}">
 
             <CollectionView ItemsSource="{Binding Recipes}"
-                        SelectionMode="None"
-                        Style="{StaticResource MainLayout}">
+                            Style="{StaticResource MainLayout}">
 
                 <CollectionView.EmptyView>
                     <StackLayout Style="{StaticResource EmptyView}">
@@ -108,17 +107,17 @@
                             </Border.GestureRecognizers>
                             
                             <Grid ColumnDefinitions="Auto, *"
-                              RowDefinitions="*,Auto" 
-                              ColumnSpacing="10">
+                                  RowDefinitions="*,Auto" 
+                                  ColumnSpacing="10">
                                 <Image Style="{StaticResource ThumbnailImage}"
-                                   Grid.Column="0"
-                                   Grid.RowSpan="2"
-                                   Source="{Binding Image}" />
+                                       Grid.Column="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding Image}" />
                                 <Label Text="{Binding Label}"
-                                   Style="{StaticResource CardTitle}" 
-                                   Grid.Column="1"/>
+                                       Style="{StaticResource CardTitle}" 
+                                       Grid.Column="1"/>
 
-                                <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="Auto, Auto" ColumnSpacing="15" Padding="0,0,10,0">
+                                <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="Auto, Auto" Style="{StaticResource RecipeCardIconGrid}">
                                     <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}" >
                                         <Image Source="energy.png" Style="{StaticResource Icon}"/>
                                         <Label Text="{Binding Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabel}"/>

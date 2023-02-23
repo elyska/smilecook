@@ -12,8 +12,7 @@
                 <Entry Text="{Binding MyRecipe.Label}" Placeholder="Enter recipe title" ClearButtonVisibility="WhileEditing" />
             </Border>
 
-            <CollectionView ItemsSource="{Binding Ingredients}"
-                        SelectionMode="None">
+            <CollectionView ItemsSource="{Binding Ingredients}">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:MyIngredient">
@@ -33,14 +32,14 @@
             </HorizontalStackLayout>
 
             <Border Style="{StaticResource RecipeCard}" >
-                <Editor Text="{Binding MyRecipe.Instructions}" Placeholder="Enter instructions" HeightRequest="200" />
+                <Editor Text="{Binding MyRecipe.Instructions}" Placeholder="Enter instructions" Style="{StaticResource Textarea}"/>
             </Border>
 
             <HorizontalStackLayout>
                 <Button Text="Take Picture" Command="{Binding TakePhotoCommand}" Style="{StaticResource SpacedButton}" />
                 <Button Text="Upload Picture" Command="{Binding UploadPhotoCommand}" Style="{StaticResource SpacedButton}" />
             </HorizontalStackLayout>
-            <Image Source="{Binding ImgSource}" MaximumHeightRequest="200"/>
+            <Image Source="{Binding ImgSource}" Style="{StaticResource ImagePreview}"/>
 
             <Button Text="Save Recipe" Command="{Binding SaveRecipeCommand}" Style="{StaticResource SpacedButton}" />
 

@@ -9,8 +9,7 @@
     <ScrollView Style="{StaticResource MainLayout}">
         <VerticalStackLayout> 
 
-            <CollectionView ItemsSource="{Binding Favourites}"
-                            SelectionMode="None">
+            <CollectionView ItemsSource="{Binding Favourites}">
 
                 <CollectionView.EmptyView>
                     <StackLayout Style="{StaticResource EmptyView}">
@@ -30,7 +29,7 @@
 
                                 <Grid ColumnDefinitions="Auto, *"
                                       RowDefinitions="*,Auto" 
-                                      ColumnSpacing="10">
+                                      Style="{StaticResource SpacedGrid}">
                                     <Image Style="{StaticResource ThumbnailImage}"
                                        Grid.Column="0"
                                        Grid.RowSpan="2"
