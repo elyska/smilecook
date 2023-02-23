@@ -120,11 +120,11 @@
                                 <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="Auto, Auto" Style="{StaticResource RecipeCardIconGrid}">
                                     <HorizontalStackLayout Grid.Column="0" Style="{StaticResource IconLabelContainer}" >
                                         <Image Source="energy.png" Style="{StaticResource Icon}"/>
-                                        <Label Text="{Binding Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabel}"/>
+                                        <Label Text="{Binding Calories, StringFormat='{0:.} kcal'}" Style="{StaticResource IconLabelCard}"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout Grid.Column="1" Style="{StaticResource IconLabelContainer}">
                                         <Image Source="clock.png" Style="{StaticResource Icon}"/>
-                                        <Label Text="{Binding TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabel}"/>
+                                        <Label Text="{Binding TotalTime, StringFormat='{0} min'}" Style="{StaticResource IconLabelCard}"/>
                                     </HorizontalStackLayout>
                                 </Grid>
                             </Grid>

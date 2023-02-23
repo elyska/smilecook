@@ -23,7 +23,7 @@
                 <DataTemplate x:DataType="model:ShoppingList">
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
                         <Label Grid.Column="0" Grid.RowSpan="2"  Text="{Binding Ingredient}" />
-                        <Border Grid.Column="1" Grid.RowSpan="2"  Style="{StaticResource AddButton}">
+                        <Border Grid.Column="1" Grid.RowSpan="2"  Style="{StaticResource AddButtonBorder}">
                             <ImageButton Source="delete.svg" 
                                          CommandParameter="{Binding Id}"
                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ShoppingListViewModel}}, Path=DeleteItemCommand}"/>
