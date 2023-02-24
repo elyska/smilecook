@@ -64,10 +64,10 @@
                         <DataTemplate>
 
                             <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
-                                <Border Style="{StaticResource AddButton}">
+                                <Border Style="{StaticResource AddButtonBorder}">
                                     <Button ImageSource="add.svg" 
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
-                                            CommandParameter="{Binding .}"/>
+                                            CommandParameter="{Binding .}" Style="{StaticResource AddButton}"/>
                                 </Border>
                                 <Label Text="{Binding .}" Style="{StaticResource IconLabel}" />
                             </HorizontalStackLayout>
