@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="smilecook.Views.MyRecipeDetailPage"
+             xmlns:model="clr-namespace:smilecook.Models"
+             xmlns:viewmodel="clr-namespace:smilecook.ViewModels"
+             x:DataType="viewmodel:MyRecipeDetailViewModel"
+             Title="MyRecipeDetailPage">
+    <ScrollView Style="{StaticResource MainLayout}">
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*"
+                  RowDefinitions="*, Auto, 20">
+
+                <Image Source="{Binding Recipe.ImgSource}" 
+                       Grid.RowSpan="2"
+                       Style="{StaticResource MyRecipeImage}" />
+
+                <Border Style="{StaticResource TitleBorder}" 
+                        Grid.RowSpan="2"
+                        Grid.Row="1"
+                        Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Recipe.Label}" Style="{StaticResource RecipeTitle}"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Ingredients" Style="{StaticResource CardTitle}"/>
+
+                <CollectionView ItemsSource="{Binding Recipe.Ingredients}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MyIngredient">
+                            <HorizontalStackLayout Style="{StaticResource IconLabelContainer}">
+                                <Border Style="{StaticResource AddButtonBorder}" >
+                                    <Button ImageSource="add.svg" 
+                                            Style="{StaticResource AddButton}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MyRecipeDetailViewModel}}, Path=AddToShoppingListCommand}" 
+                                            CommandParameter="{Binding IngredientLine}"/>
+                                </Border>
+                                <Label Text="{Binding IngredientLine}" Style="{StaticResource IconLabel}" />
+                            </HorizontalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Style="{StaticResource ListLayout}">
+                <Label Text="Instructions" Style="{StaticResource CardTitle}"/>
+                <Label Text="{Binding Recipe.Instructions}" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

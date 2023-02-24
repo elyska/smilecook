@@ -5,6 +5,7 @@
              x:Class="smilecook.App">
     <Application.Resources>
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
@@ -14,7 +15,14 @@
             <!-- Colours -->
             <Color x:Key="Primary">#ffc439</Color>
             <Color x:Key="Shadow">Grey</Color>
-            <Color x:Key="Background">#f7f4f4</Color>
+
+            <Color x:Key="TextLight">#050505</Color>
+            <Color x:Key="TextDark">white</Color>
+            
+            <Color x:Key="BackgroundLight">#f7f4f4</Color>
+            <Color x:Key="BackgroundLighter">white</Color>
+            <Color x:Key="BackgroundDark">#4d4d4d</Color>
+            <Color x:Key="BackgroundDarker">#050505</Color>
 
 
             <Style TargetType="Image" x:Key="ThumbnailImage">
@@ -23,9 +31,46 @@
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
+            <Style TargetType="CollectionView" x:Key="HorizontalCollection">
+                <Setter Property="ItemsLayout" Value="HorizontalList" />
+            </Style>
+
+            <Style TargetType="CollectionView" x:Key="TwoColumnCollection">
+                <Setter Property="ItemsLayout" Value="VerticalGrid, 2" />
+            </Style>
+
+            <Style TargetType="Grid" x:Key="RecipeCardIconGrid">
+                <Setter Property="ColumnSpacing" Value="15" />
+                <Setter Property="Padding" Value="0,0,10,0" />
+            </Style>
+
+            <Style TargetType="Grid" x:Key="RecipeTitleGrid">
+                <Setter Property="ColumnSpacing" Value="15" />
+                <Setter Property="Padding" Value="10,0,10,0" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="Grid" x:Key="SpacedGrid">
+                <Setter Property="ColumnSpacing" Value="10" />
+            </Style>
+
+            <Style TargetType="Image" x:Key="ImagePreview">
+                <Setter Property="MaximumHeightRequest" Value="200" />
+            </Style>
+
+
+            <Style TargetType="Image" x:Key="MyRecipeImage">
+                <Setter Property="HeightRequest" Value="400" />
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
             <Style TargetType="Image" x:Key="Logo">
                 <Setter Property="HeightRequest" Value="30" />
                 <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+
+            <Style TargetType="StackLayout" x:Key="EmptyView">
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style TargetType="Image" x:Key="Icon">
@@ -52,7 +97,7 @@
 
             <Style x:Key="Link" TargetType="Button">
                 <Setter Property="Background" Value="transparent"/>
-                <Setter Property="TextColor" Value="black"/>
+                <Setter Property="TextColor" Value="{StaticResource TextLight}"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="HorizontalOptions" Value="Start"/>
@@ -65,14 +110,22 @@
                 <Setter Property="HorizontalOptions" Value="End"/>
                 <Setter Property="VerticalOptions" Value="Start"/>
             </Style>
+
+            <Style x:Key="SpacedButton" TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="{StaticResource TextDark}"/>
+            </Style>
+            
             <Style x:Key="RecipeTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLight}, Dark={StaticResource TextLight}}"/>
                 <Setter Property="Background" Value="transparent"/>
-                <!--<Setter Property="Background" Value="{StaticResource Primary}"/>
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="HeightRequest" Value="90"/>-->
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
@@ -81,8 +134,13 @@
             
             <Style x:Key="IconLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLight}, Dark={StaticResource TextLight}}"/>
             </Style>
-            
+
+
+            <Style x:Key="IconLabelCard" BasedOn="{StaticResource IconLabel}" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLight}, Dark={StaticResource TextDark}}"/>
+            </Style>
 
             <Style x:Key="IconLabelContainer" TargetType="HorizontalStackLayout">
                 <Setter Property="Spacing" Value="5"/>
@@ -102,7 +160,7 @@
             
             <Style TargetType="View" x:Key="MainLayout"
                    ApplyToDerivedTypes="true">
-                <Setter Property="Background" Value="{StaticResource Background}" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}" />
             </Style>
 
 
@@ -113,11 +171,12 @@
                 Opacity="0.6"/>
 
             <Style x:Key="BadgeLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="white"/>
+                <Setter Property="TextColor" Value="{StaticResource BackgroundLighter}"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
+            
             <Style x:Key="Badge" TargetType="Border">
                 <Setter Property="Background" Value="red" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
@@ -127,18 +186,23 @@
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="35, 3, 0, 30"/>
             </Style>
-            
-            <Style x:Key="AddButton" TargetType="Border">
-                <Setter Property="Background" Value="white" />
+
+            <Style x:Key="AddButtonBorder" TargetType="Border">
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" />
                 <Setter Property="StrokeShape" Value="Ellipse"/>
                 <Setter Property="StrokeThickness" Value="0"/>
                 <Setter Property="Padding" Value="5"/>
                 <Setter Property="WidthRequest" Value="30"/>
                 <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+            <Style x:Key="AddButton" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource Primary}" />
+
             </Style>
 
             <Style x:Key="RecipeCard" TargetType="Border">
-                <Setter Property="Background" Value="white" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource BackgroundLighter}, Dark={StaticResource BackgroundDarker}}" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
                 <Setter Property="StrokeThickness" Value="0"/>
                 <Setter Property="Padding" Value="0,0,10,0"/>
@@ -147,25 +211,19 @@
             </Style>
 
             <Style x:Key="TitleBorder" TargetType="Border">
-                <Setter Property="Background" Value="white" />
+                <Setter Property="Background" Value="{StaticResource BackgroundLighter}" />
                 <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
                 <Setter Property="StrokeThickness" Value="0"/>
                 <Setter Property="Shadow" Value="{StaticResource CardShadow}"/>
-                <!--
-                <Setter Property="BorderColor" Value="White"/>
-                <Setter Property="HasShadow" Value="true"/>
-                <Setter Property="CornerRadius" Value="10"/>-->
-
                 <Setter Property="Opacity" Value="0.8"/>
                 <Setter Property="MaximumWidthRequest" Value="300"/>
-
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="LabelTag" TargetType="Border">
-                <Setter Property="Background" Value="white"/>
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource BackgroundLighter}, Dark={StaticResource BackgroundDarker}}"/>
                 <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
                 <Setter Property="StrokeThickness" Value="0"/>
                 <Setter Property="Margin" Value="5"/>
@@ -173,8 +231,16 @@
             </Style>
 
             <Style x:Key="SearchField" TargetType="SearchBar">
-                <Setter Property="Background" Value="white" />
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource BackgroundLighter}, Dark={StaticResource BackgroundDarker}}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="CheckBox">
+                <Setter Property="Color" Value="{StaticResource Primary}" />
+            </Style>
+
+            <Style x:Key="Textarea" TargetType="Editor">
+                <Setter Property="HeightRequest" Value="200" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

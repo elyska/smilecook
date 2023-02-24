@@ -34,19 +34,27 @@ public static class MauiProgram
         builder.Services.AddTransient<RecipeDetailViewModel>();
         builder.Services.AddSingleton<ShoppingListViewModel>();
         builder.Services.AddSingleton<FavouritesViewModel>();
+        builder.Services.AddSingleton<AddRecipeFormViewModel>();
+        builder.Services.AddSingleton<MyRecipesViewModel>();
+        builder.Services.AddTransient<MyRecipeDetailViewModel>();
 
         // pages
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<RecipeDetailPage>();
         builder.Services.AddSingleton<ShoppingListPage>();
         builder.Services.AddSingleton<FavouritesPage>();
-        
+        builder.Services.AddSingleton<AddRecipeFormPage>();
+        builder.Services.AddSingleton<MyRecipesPage>();
+        builder.Services.AddTransient<MyRecipeDetailPage>();
+
         // services
         builder.Services.AddSingleton<RecipeAPIService>();
         string dbPath = FileAccessHelper.GetLocalFilePath("database.db3");
         builder.Services.AddSingleton<FiltersDBService>(s => ActivatorUtilities.CreateInstance<FiltersDBService>(s, dbPath));
         builder.Services.AddSingleton<ShoppingListDBService>(s => ActivatorUtilities.CreateInstance<ShoppingListDBService>(s, dbPath));
         builder.Services.AddSingleton<FavouritesDBService>(s => ActivatorUtilities.CreateInstance<FavouritesDBService>(s, dbPath));
+        builder.Services.AddSingleton<MyRecipesDBService>(s => ActivatorUtilities.CreateInstance<MyRecipesDBService>(s, dbPath));
+        builder.Services.AddSingleton<MyIngredientDBService>(s => ActivatorUtilities.CreateInstance<MyIngredientDBService>(s, dbPath));
 
         return builder.Build();
 	}

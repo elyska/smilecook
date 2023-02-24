@@ -1,5 +1,3 @@
-using Android.OS;
-using AndroidX.Lifecycle;
 using smilecook.ViewModels;
 
 namespace smilecook.Views;
